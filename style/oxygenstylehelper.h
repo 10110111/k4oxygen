@@ -25,12 +25,8 @@
 #include "oxygenhelper.h"
 #include "oxygenanimationmodes.h"
 
-#include <KWindowSystem>
-
-#ifdef Q_WS_X11
 #include <QtGui/QX11Info>
 #include <X11/Xdefs.h>
-#endif
 
 //! helper class
 /*! contains utility functions used at multiple places in oxygen style */
@@ -241,13 +237,8 @@ namespace Oxygen
         TileSetCache _selectionCache;
         TileSetCache _progressBarCache;
 
-        #ifdef Q_WS_X11
-
         //! background gradient hint atom
         Atom _compositingManagerAtom;
-
-        #endif
-
     };
 
     //____________________________________________________________________
@@ -268,7 +259,6 @@ namespace Oxygen
     bool StyleHelper::hasAlphaChannel( const QWidget* widget ) const
     {
 
-        #ifdef Q_WS_X11
         if( compositingActive() )
         {
 
@@ -276,11 +266,6 @@ namespace Oxygen
             else return QX11Info().appDepth() == 32;
 
         } else return false;
-
-        #else
-        return compositingActive();
-        #endif
-
     }
 
 }
