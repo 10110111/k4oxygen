@@ -1,7 +1,7 @@
 
 project(kstyle-oxygen-transparent)
 
-add_subdirectory( config )
+#add_subdirectory( config )
 
 include_directories (animations debug transitions ../libs/)
 
