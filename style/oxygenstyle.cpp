@@ -103,11 +103,6 @@
 
 #include <cmath>
 
-/* These are to link libkio even if 'smart' linker is used */
-#include <kio/authinfo.h>
-extern "C" KIO::AuthInfo* _oxygen_init_kio() { return new KIO::AuthInfo(); }
-
-
 //_____________________________________________
 // style plugin
 namespace Oxygen
