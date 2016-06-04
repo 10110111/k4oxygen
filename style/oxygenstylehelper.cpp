@@ -26,6 +26,7 @@
 
 #include <QtGui/QPainter>
 #include <QtGui/QLinearGradient>
+#include <QtCore/QTextStream>
 
 #include <math.h>
 
@@ -40,7 +41,6 @@ namespace Oxygen
     //______________________________________________________________________________
     StyleHelper::StyleHelper( const QByteArray &componentName ):
         Helper( componentName ),
-        _debugArea( KDebug::registerArea( "Oxygen ( style )" ) ),
         _useBackgroundGradient( true )
     {
 

@@ -26,7 +26,6 @@
 #include "oxygenanimationmodes.h"
 
 #include <KWindowSystem>
-#include <KDebug>
 
 #ifdef Q_WS_X11
 #include <QtGui/QX11Info>
@@ -57,10 +56,6 @@ namespace Oxygen
 
         //! destructor
         virtual ~StyleHelper() {}
-
-        //! dynamically allocated debug area
-        int debugArea( void ) const
-        { return _debugArea; }
 
         //! clear cache
         virtual void invalidateCaches();
@@ -219,9 +214,6 @@ namespace Oxygen
         void drawSliderSlab( QPainter&, const QColor&, bool sunken, qreal );
 
         private:
-
-        //! dynamically allocated debug area
-        int _debugArea;
 
         //! background grandient
         bool _useBackgroundGradient;
