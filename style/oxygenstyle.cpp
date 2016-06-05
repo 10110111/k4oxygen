@@ -109,13 +109,13 @@ namespace Oxygen
 
         //! returns list of valid keys
         QStringList keys() const
-        { return QStringList( QLatin1String( "Oxygen Transparent" ) ); }
+        { return QStringList( QLatin1String( "K4Oxygen" ) ); }
 
         //! create style
         QStyle *create( const QString &key )
         {
 
-            if( key.toLower() == QLatin1String( "oxygen transparent" ) ) return new Style;
+            if( key.toLower() == QLatin1String( "k4oxygen" ) ) return new Style;
             else return NULL;
         }
     };

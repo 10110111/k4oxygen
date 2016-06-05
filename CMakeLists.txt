@@ -1,4 +1,4 @@
-project(oxygen-transparent)
+project(k4oxygen)
 
 set(CMAKE_AUTOMOC ON)
 find_package(Qt4 4.8 REQUIRED QtCore QtDBus QtGui)

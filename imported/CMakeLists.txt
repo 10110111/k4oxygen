@@ -1,4 +1,4 @@
-project(kstyle-oxygen-transparent)
+project(kstyle-k4oxygen)
 
 include_directories (../imported/)
 

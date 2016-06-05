@@ -19,16 +19,16 @@ kde4_add_ui_files(kwin_oxygen_config_PART_SRCS
 
 kde4_add_kcfg_files(kwin_oxygen_config_PART_SRCS ../oxygenconfiguration.kcfgc )
 
-kde4_add_plugin(kwin_oxygen_transparent_config ${kwin_oxygen_config_PART_SRCS})
+kde4_add_plugin(kwin_k4oxygen_config ${kwin_oxygen_config_PART_SRCS})
 
 target_link_libraries(
-    kwin_oxygen_transparent_config
+    kwin_k4oxygen_config
     ${KDE4_KDEUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${X11_X11_LIB}
     ${KDE4WORKSPACE_KDECORATIONS_LIBS}
-    oxygentransparentstyle
-    oxygentransparentstyleconfig
+    k4oxygenstyle
+    k4oxygenstyleconfig
   )
 
-install(TARGETS kwin_oxygen_transparent_config  DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS kwin_k4oxygen_config  DESTINATION ${PLUGIN_INSTALL_DIR} )

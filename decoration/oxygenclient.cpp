@@ -79,7 +79,7 @@ namespace Oxygen
 
     //___________________________________________
     QString Client::visibleName() const
-    { return i18n("Oxygen Transparent"); }
+    { return i18n("K4Oxygen"); }
 
     //___________________________________________
     void Client::init()

@@ -52,7 +52,7 @@ extern "C"
 {
     KDE_EXPORT QWidget* allocate_kstyle_config(QWidget* parent)
     {
-        KGlobal::locale()->insertCatalog("oxygen_transparent");
+        KGlobal::locale()->insertCatalog("k4oxygen");
         return new Oxygen::StyleConfig(parent);
     }
 }
@@ -66,7 +66,7 @@ namespace Oxygen
         _expertMode( false ),
         _animationConfigWidget(0)
     {
-        KGlobal::locale()->insertCatalog("oxygen_transparent");
+        KGlobal::locale()->insertCatalog("k4oxygen");
 
         setupUi(this);
 

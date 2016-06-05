@@ -163,7 +163,7 @@ namespace Oxygen
     {
 
         // load decoration from plugin
-        KLibrary* library = new KLibrary( "kstyle_oxygen_transparent_config" );
+        KLibrary* library = new KLibrary( "kstyle_k4oxygen_config" );
 
         if (library->load())
         {
@@ -209,7 +209,7 @@ namespace Oxygen
     {
 
         // load decoration from plugin
-        KLibrary* library = new KLibrary( "kwin_oxygen_transparent_config" );
+        KLibrary* library = new KLibrary( "kwin_k4oxygen_config" );
 
         if (library->load())
         {

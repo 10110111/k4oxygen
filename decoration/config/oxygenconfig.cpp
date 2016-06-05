@@ -59,7 +59,7 @@ namespace Oxygen
         QObject( parent )
     {
 
-        KGlobal::locale()->insertCatalog("oxygen_transparent");
+        KGlobal::locale()->insertCatalog("k4oxygen");
 
         // configuration
         _configuration = KSharedConfig::openConfig( "oxygenrc" );

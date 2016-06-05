@@ -9,16 +9,16 @@ set(oxygenstyle_LIB_SRCS
     oxygenshadow_config.cpp
 )
 
-add_library(oxygentransparentstyle SHARED ${oxygenstyle_LIB_SRCS})
+add_library(k4oxygenstyle SHARED ${oxygenstyle_LIB_SRCS})
 
-target_link_libraries(oxygentransparentstyle ${QT_LIBRARIES} oxygen-imported)
+target_link_libraries(k4oxygenstyle ${QT_LIBRARIES} oxygen-imported)
 
 if ( X11_FOUND )
-   target_link_libraries(oxygentransparentstyle ${X11_LIBRARIES})
+   target_link_libraries(k4oxygenstyle ${X11_LIBRARIES})
 endif( X11_FOUND )
 
-set_target_properties(oxygentransparentstyle PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS oxygentransparentstyle LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR})
+set_target_properties(k4oxygenstyle PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+install(TARGETS k4oxygenstyle LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR})
 
 # next target
 #set(oxygenstyleconfig_LIB_SRCS
@@ -40,16 +40,16 @@ install(TARGETS oxygentransparentstyle LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR
 #  oxygeninactiveshadowconfiguration.kcfgc
 #)
 #
-#kde4_add_library(oxygentransparentstyleconfig SHARED ${oxygenstyleconfig_LIB_SRCS})
+#kde4_add_library(k4oxygenstyleconfig SHARED ${oxygenstyleconfig_LIB_SRCS})
 
-#target_link_libraries(oxygentransparentstyleconfig oxygentransparentstyle)
-#target_link_libraries(oxygentransparentstyleconfig ${KDE4_KDEUI_LIBS})
+#target_link_libraries(k4oxygenstyleconfig k4oxygenstyle)
+#target_link_libraries(k4oxygenstyleconfig ${KDE4_KDEUI_LIBS})
 #
 #if ( X11_FOUND )
-#   target_link_libraries(oxygentransparentstyleconfig ${X11_LIBRARIES})
+#   target_link_libraries(k4oxygenstyleconfig ${X11_LIBRARIES})
 #endif( X11_FOUND )
 #
-#set_target_properties(oxygentransparentstyleconfig PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-#install(TARGETS oxygentransparentstyleconfig ${INSTALL_TARGETS_DEFAULT_ARGS} )
+#set_target_properties(k4oxygenstyleconfig PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+#install(TARGETS k4oxygenstyleconfig ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # Note: no headers installed

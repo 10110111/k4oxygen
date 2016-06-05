@@ -1,4 +1,4 @@
-project(kstyle-oxygen-transparent)
+project(kstyle-k4oxygen)
 
 #add_subdirectory( config )
 
@@ -6,7 +6,7 @@ include_directories (animations debug transitions ../style/ ../libs/ ../imported
 
 ########### next target ###############
 
-set(oxygen_transparent_PART_SRCS
+set(k4oxygen_PART_SRCS
     animations/oxygenanimations.cpp
     animations/oxygenanimationdata.cpp
     animations/oxygenbaseengine.cpp
@@ -65,15 +65,15 @@ set(oxygen_transparent_PART_SRCS
 )
 
 # emulate what kde4_add_plugin would do
-add_library(oxygen_transparent SHARED ${oxygen_transparent_PART_SRCS})
-set_target_properties(oxygen_transparent PROPERTIES
+add_library(k4oxygen SHARED ${k4oxygen_PART_SRCS})
+set_target_properties(k4oxygen PROPERTIES
                       PREFIX ""
                       )
 
-target_link_libraries(oxygen_transparent  ${QT_LIBRARIES} oxygentransparentstyle oxygen-imported)
+target_link_libraries(k4oxygen  ${QT_LIBRARIES} k4oxygenstyle oxygen-imported)
 
 if ( X11_FOUND )
-   target_link_libraries(oxygen_transparent ${X11_LIBRARIES})
+   target_link_libraries(k4oxygen ${X11_LIBRARIES})
 endif( X11_FOUND )
 
-install(TARGETS oxygen_transparent LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS k4oxygen LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR} )

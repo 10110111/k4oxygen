@@ -3,7 +3,7 @@ add_definitions ( -DAPP_VERSION=\\\"${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKA
 add_subdirectory( config )
 
 ########### next target ###############
-set(kwin_oxygen_transparent_SRCS
+set(kwin_k4oxygen_SRCS
      oxygenbutton.cpp
      oxygenclient.cpp
      oxygenclientgroupitemdata.cpp
@@ -14,20 +14,20 @@ set(kwin_oxygen_transparent_SRCS
      oxygentitleanimationdata.cpp
   )
 
-kde4_add_kcfg_files(kwin_oxygen_transparent_SRCS oxygenconfiguration.kcfgc )
+kde4_add_kcfg_files(kwin_k4oxygen_SRCS oxygenconfiguration.kcfgc )
 
-kde4_add_plugin(kwin3_oxygen_transparent ${kwin_oxygen_transparent_SRCS})
+kde4_add_plugin(kwin3_k4oxygen ${kwin_k4oxygen_SRCS})
 target_link_libraries(
-    kwin3_oxygen_transparent
+    kwin3_k4oxygen
     ${KDE4_KDEUI_LIBS}
     ${X11_X11_LIB}
     ${X11_Xrender_LIB}
     ${KDE4WORKSPACE_KDECORATIONS_LIBS}
-    oxygentransparentstyle
+    k4oxygenstyle
   )
 
-install(TARGETS kwin3_oxygen_transparent  DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS kwin3_k4oxygen  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ########### install files ###############
-install( FILES oxygentransparentclient.desktop  DESTINATION  ${DATA_INSTALL_DIR}/kwin/ )
+install( FILES k4oxygenclient.desktop  DESTINATION  ${DATA_INSTALL_DIR}/kwin/ )
 
