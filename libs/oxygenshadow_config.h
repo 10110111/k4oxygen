@@ -20,6 +20,7 @@ public:
         static ActiveShadowConfiguration* self=new ActiveShadowConfiguration();
         return self;
     }
+    ActiveShadowConfiguration() { readConfig(); }
     void readConfig();
 /*
   <group name="ActiveShadow">
@@ -73,6 +74,7 @@ public:
         static InactiveShadowConfiguration* self=new InactiveShadowConfiguration();
         return self;
     }
+    InactiveShadowConfiguration() { readConfig(); }
     void readConfig();
 /*
   <group name="InactiveShadow">

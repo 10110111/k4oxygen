@@ -133,6 +133,7 @@ public:
         static StyleConfigData* self=new StyleConfigData();
         return self;
     }
+    StyleConfigData() { readConfig(); }
     void readConfig();
 
     // getters
