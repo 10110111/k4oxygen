@@ -30,8 +30,11 @@
 #include <sstream>
 #include <string>
 #include "oxygen_export.h"
+#include <QtCore/QTextStream>
 
 class QColor;
+class QStringList;
+class QString;
 
 namespace Oxygen
 {
@@ -120,14 +123,9 @@ namespace Oxygen
     //_______________________________________________________________________
     template<typename T> T Option::toVariant( T defaultValue ) const
     {
-
-        T out;
-        std::istringstream stream( _value );
-        return ( stream >> out ) ? out:defaultValue;
+        QVariant var(QString(_value.c_str()));
+        return !_value.empty() && var.canConvert<T>() ? var.value<T>() : defaultValue;
     }
-
-    // specialization of template to correctly handle std::string with spaces
-    template<> std::string Option::toVariant( std::string defaultValue ) const;
 
     //_______________________________________________________________________
     bool Option::Set::operator == (const Option::Set& other ) const
@@ -142,8 +140,6 @@ namespace Oxygen
 
         return firstIter == end() && secondIter == other.end();
     }
-
-    OXYGEN_EXPORT std::istream& operator >> (std::istream& stream, QColor& color);
 }
 
 #endif

@@ -220,6 +220,7 @@ OxygenConfig* OxygenConfig::self()
 void OxygenConfig::reparseConfiguration()
 {
     // TODO(10110111): parse oxygenrc
+    // TODO(10110111): check that shadow configuration is also loaded
 }
 
 OxygenConfig::OxygenConfig()

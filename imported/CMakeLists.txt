@@ -2,7 +2,6 @@ project(kstyle-oxygen-transparent)
 
 set(oxygen_imported_SRCS
     oxygenconfig.cpp
-    oxygenoption.cpp
     oxygenoptionmap.cpp
     oxygennetrootinfo.cpp
     kcolorscheme.cpp

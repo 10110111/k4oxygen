@@ -95,7 +95,6 @@
 
 #include "kcolorutils.h"
 #include "oxygenconfig.h"
-#include <kdeversion.h>
 
 #include <cmath>
 
@@ -8451,7 +8450,6 @@ namespace Oxygen
     void Style::initializeKGlobalSettings( void )
     {
 
-        #if KDE_IS_VERSION( 4, 6, 0 )
         if( qApp && !qApp->inherits( "KApplication" ) )
         {
             /*
@@ -8461,7 +8459,6 @@ namespace Oxygen
             */
             KGlobalSettings::self()->activate( KGlobalSettings::ListenForChanges );
         }
-        #endif
 
         // connect palette changes to local slot, to make sure caches are cleared
         connect( KGlobalSettings::self(), SIGNAL(kdisplayPaletteChanged()), this, SLOT(globalPaletteChanged()) );

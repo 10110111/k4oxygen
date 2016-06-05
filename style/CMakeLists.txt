@@ -62,9 +62,10 @@ set(oxygen_transparent_PART_SRCS
     oxygenstyle.cpp
     oxygenstylehelper.cpp
     oxygenwindowmanager.cpp
+    oxygenstyleconfigdata.cpp
 )
 
-kde4_add_kcfg_files(oxygen_transparent_PART_SRCS oxygenstyleconfigdata.kcfgc)
+#kde4_add_kcfg_files(oxygen_transparent_PART_SRCS oxygenstyleconfigdata.kcfgc)
 
 # emulate what kde4_add_plugin would do
 add_library(oxygen_transparent SHARED ${oxygen_transparent_PART_SRCS})
