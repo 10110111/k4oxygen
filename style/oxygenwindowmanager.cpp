@@ -30,7 +30,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenwindowmanager.h"
-#include "oxygenwindowmanager.moc"
 #include "oxygenpropertynames.h"
 #include "oxygenstyleconfigdata.h"
 

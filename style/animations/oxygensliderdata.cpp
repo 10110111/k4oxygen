@@ -25,7 +25,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygensliderdata.h"
-#include "oxygensliderdata.moc"
 
 #include <QtGui/QHoverEvent>
 #include <QtGui/QSlider>

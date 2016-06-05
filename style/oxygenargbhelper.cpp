@@ -28,7 +28,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenargbhelper.h"
-#include "oxygenargbhelper.moc"
 
 #include <QtGui/QDialog>
 #include <QtGui/QIcon>

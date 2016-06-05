@@ -47,7 +47,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenstyle.h"
-#include "oxygenstyle.moc"
 
 #include "oxygenanimations.h"
 #include "oxygenargbhelper.h"

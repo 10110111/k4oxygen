@@ -25,7 +25,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenscrollbardata.h"
-#include "oxygenscrollbardata.moc"
 
 #include <QtGui/QHoverEvent>
 #include <QtGui/QScrollBar>

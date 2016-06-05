@@ -27,7 +27,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenheaderviewdata.h"
-#include "oxygenheaderviewdata.moc"
 
 #include <QtGui/QHoverEvent>
 

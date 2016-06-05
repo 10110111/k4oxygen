@@ -28,7 +28,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenconfig.h"
-#include "oxygenconfig.moc"
 
 #include "oxygenanimationconfigwidget.h"
 #include "oxygenconfiguration.h"

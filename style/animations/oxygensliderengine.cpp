@@ -25,7 +25,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygensliderengine.h"
-#include "oxygensliderengine.moc"
 
 #include <QtCore/QEvent>
 

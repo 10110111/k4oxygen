@@ -25,7 +25,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenfactory.h"
-#include "oxygenfactory.moc"
 #include "oxygenclient.h"
 #include "oxygenexceptionlist.h"
 

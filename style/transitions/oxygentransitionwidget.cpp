@@ -25,7 +25,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygentransitionwidget.h"
-#include "oxygentransitionwidget.moc"
 
 #include <cassert>
 #include <QtGui/QPainter>

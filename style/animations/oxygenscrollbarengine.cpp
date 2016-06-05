@@ -25,7 +25,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenscrollbarengine.h"
-#include "oxygenscrollbarengine.moc"
 
 #include <QtCore/QEvent>
 

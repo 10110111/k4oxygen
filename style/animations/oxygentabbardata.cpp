@@ -27,7 +27,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygentabbardata.h"
-#include "oxygentabbardata.moc"
 
 #include <QtGui/QHoverEvent>
 #include <QtGui/QTabBar>

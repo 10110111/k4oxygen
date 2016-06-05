@@ -24,7 +24,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenblacklistdialog.h"
-#include "oxygenblacklistdialog.moc"
 
 #include <KIconLoader>
 #include <KMessageBox>

@@ -25,7 +25,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygentabbarengine.h"
-#include "oxygentabbarengine.moc"
 
 #include <QtCore/QEvent>
 
