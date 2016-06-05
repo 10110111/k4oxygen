@@ -14,7 +14,7 @@ kde4_add_kcfg_files(oxygenstyle_LIB_SRCS
   oxygeninactiveshadowconfiguration.kcfgc
 )
 
-kde4_add_library(oxygentransparentstyle SHARED ${oxygenstyle_LIB_SRCS})
+add_library(oxygentransparentstyle SHARED ${oxygenstyle_LIB_SRCS})
 
 target_link_libraries(oxygentransparentstyle ${KDE4_KDEUI_LIBS} oxygen-imported)
 

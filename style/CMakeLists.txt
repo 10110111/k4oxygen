@@ -66,7 +66,9 @@ set(oxygen_transparent_PART_SRCS
 
 kde4_add_kcfg_files(oxygen_transparent_PART_SRCS oxygenstyleconfigdata.kcfgc)
 
-kde4_add_plugin(oxygen_transparent ${oxygen_transparent_PART_SRCS})
+# emulate what kde4_add_plugin would do
+add_library(oxygen_transparent SHARED ${oxygen_transparent_PART_SRCS})
+set_target_properties(oxygen_transparent PROPERTIES PREFIX "")
 
 target_link_libraries(oxygen_transparent  ${KDE4_KDEUI_LIBS} oxygentransparentstyle oxygen-imported)
 
