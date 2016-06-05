@@ -59,7 +59,7 @@
 
 #include <QtCore/QTextStream>
 
-#include <KGlobalSettings>
+#include "oxygenconfig.h"
 
 #ifdef Q_WS_X11
 #include <QX11Info>

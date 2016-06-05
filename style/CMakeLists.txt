@@ -3,7 +3,7 @@ project(kstyle-oxygen-transparent)
 
 #add_subdirectory( config )
 
-include_directories (animations debug transitions ../libs/)
+include_directories (animations debug transitions ../libs/ ../imported/)
 
 ########### next target ###############
 
@@ -68,7 +68,7 @@ kde4_add_kcfg_files(oxygen_transparent_PART_SRCS oxygenstyleconfigdata.kcfgc)
 
 kde4_add_plugin(oxygen_transparent ${oxygen_transparent_PART_SRCS})
 
-target_link_libraries(oxygen_transparent  ${KDE4_KDEUI_LIBS} oxygentransparentstyle)
+target_link_libraries(oxygen_transparent  ${KDE4_KDEUI_LIBS} oxygentransparentstyle oxygen-imported)
 
 if ( X11_FOUND )
    target_link_libraries(oxygen_transparent ${X11_LIBRARIES})

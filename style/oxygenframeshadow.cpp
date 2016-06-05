@@ -38,7 +38,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QSplitter>
 
-#include <KColorUtils>
+#include "kcolorutils.h"
 
 namespace Oxygen
 {

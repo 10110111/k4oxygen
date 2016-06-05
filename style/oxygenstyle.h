@@ -62,8 +62,6 @@
 #include <QtGui/QToolBox>
 #include <QtGui/QWidget>
 
-#include <KIcon>
-
 namespace Oxygen
 {
 
@@ -933,7 +931,7 @@ namespace Oxygen
         //@}
 
         //! tab close button icon (cached)
-        mutable KIcon _tabCloseIcon;
+//        mutable KIcon _tabCloseIcon; // FIXME(10110111): see comment in drawIndicatorTabClose()
 
     };
 

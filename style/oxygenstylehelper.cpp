@@ -21,8 +21,8 @@
 
 #include "oxygenstylehelper.h"
 
-#include <KColorUtils>
-#include <KColorScheme>
+#include "kcolorutils.h"
+#include "kcolorscheme.h"
 
 #include <QtGui/QPainter>
 #include <QtGui/QLinearGradient>
@@ -37,8 +37,7 @@ namespace Oxygen
 {
 
     //______________________________________________________________________________
-    StyleHelper::StyleHelper( const QByteArray &componentName ):
-        Helper( componentName ),
+    StyleHelper::StyleHelper():
         _useBackgroundGradient( true )
     {
 

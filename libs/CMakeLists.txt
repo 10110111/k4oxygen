@@ -1,3 +1,5 @@
+include_directories (../imported/)
+
 set(oxygenstyle_LIB_SRCS
     oxygenanimation.cpp
     oxygenhelper.cpp
@@ -14,7 +16,7 @@ kde4_add_kcfg_files(oxygenstyle_LIB_SRCS
 
 kde4_add_library(oxygentransparentstyle SHARED ${oxygenstyle_LIB_SRCS})
 
-target_link_libraries(oxygentransparentstyle ${KDE4_KDEUI_LIBS})
+target_link_libraries(oxygentransparentstyle ${KDE4_KDEUI_LIBS} oxygen-imported)
 
 if ( X11_FOUND )
    target_link_libraries(oxygentransparentstyle ${X11_LIBRARIES})

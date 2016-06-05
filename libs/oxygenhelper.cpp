@@ -22,10 +22,6 @@
 
 #include "oxygenhelper.h"
 
-#include <KColorUtils>
-#include <KColorScheme>
-#include <KGlobalSettings>
-
 #include <QtGui/QWidget>
 #include <QtGui/QPainter>
 
@@ -46,14 +42,9 @@ namespace Oxygen
     const qreal Helper::_glowBias = 0.6;
 
     //____________________________________________________________________
-    // NOTE: Oxygen::StyleHelper needs to use a KConfig from its own KComponentData
-    // Since the ctor order causes a SEGV if we try to pass in a KConfig here from
-    // a KComponentData constructed in the OxygenStyleHelper ctor, we'll just keep
-    // one here, even though the window decoration doesn't really need it.
-    Helper::Helper( const QByteArray& componentName ):
-        _componentData( componentName, 0, KComponentData::SkipMainComponentRegistration )
+    Helper::Helper()
     {
-        _config = _componentData.config();
+        _config = KGlobal::config();
         _contrast = KGlobalSettings::contrastF( _config );
 
         // background contrast is calculated so that it is 0.9

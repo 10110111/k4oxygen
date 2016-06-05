@@ -30,7 +30,7 @@
 
 #include <cassert>
 #include <cmath>
-#include <KColorUtils>
+#include "kcolorutils.h"
 #include <QtGui/QPainter>
 #include <QtCore/QTextStream>
 

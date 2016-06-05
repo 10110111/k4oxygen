@@ -39,7 +39,7 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QPaintEvent>
-#include <KColorScheme>
+#include "kcolorscheme.h"
 
 namespace Oxygen
 {

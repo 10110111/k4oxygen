@@ -36,7 +36,7 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QPaintEvent>
-#include <KColorScheme>
+#include "kcolorscheme.h"
 
 #include "oxygenstylehelper.h"
 #include "oxygentileset.h"

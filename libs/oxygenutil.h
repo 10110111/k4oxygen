@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "oxygen_export.h"
+/*#include "oxygen_export.h"
 
 #include <kconfigskeleton.h>
 #include <KConfig>
@@ -40,6 +40,6 @@ namespace Oxygen
 
     };
 
-}
+}*/
 
 #endif

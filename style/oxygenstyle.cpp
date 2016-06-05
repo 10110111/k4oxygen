@@ -94,11 +94,8 @@
 
 #include <QtDBus/QDBusConnection>
 
-#include <KColorUtils>
-#include <KGlobal>
-#include <KGlobalSettings>
-#include <KIconLoader>
-#include <KIcon>
+#include "kcolorutils.h"
+#include "oxygenconfig.h"
 #include <kdeversion.h>
 
 #include <cmath>
@@ -159,7 +156,7 @@ namespace Oxygen
         _subLineButtons( SingleButton ),
         _singleButtonHeight( 14 ),
         _doubleButtonHeight( 28 ),
-        _helper( new StyleHelper( "oxygen" ) ),
+        _helper( new StyleHelper ),
         _shadowHelper( new ShadowHelper( this, *_helper ) ),
         _animations( new Animations( this ) ),
         _transitions( new Transitions( this ) ),
@@ -2877,7 +2874,9 @@ namespace Oxygen
     //___________________________________________________________________________________
     bool Style::drawIndicatorTabClose( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
-        if( _tabCloseIcon.isNull() ) { // load the icon on-demand: in the constructor, KDE is not yet ready to find it!
+        // FIXME(10110111): not using oxygen-themed icon for this, letting Qt draw its own icon (the button will look as in oxygen-gtk)
+        return false;
+/*        if( _tabCloseIcon.isNull() ) { // load the icon on-demand: in the constructor, KDE is not yet ready to find it!
             _tabCloseIcon = KIcon( "dialog-close" );
             if( _tabCloseIcon.isNull() ) return false; // still not found? cancel
         }
@@ -2897,7 +2896,7 @@ namespace Oxygen
         QIcon::State state = option->state & State_Sunken ? QIcon::On:QIcon::Off;
         QPixmap pixmap = _tabCloseIcon.pixmap(size, mode, state);
         drawItemPixmap( painter, option->rect, Qt::AlignCenter, pixmap );
-        return true;
+        return true;*/
     }
 
     //___________________________________________________________________________________
@@ -8153,10 +8152,10 @@ namespace Oxygen
         const QStyleOption *option,
         const QWidget *widget ) const
     {
-
         switch( standardIcon )
         {
-
+        // FIXME(10110111): stubbing this out until KIcon or something instead is implemented
+/*
             // copied from kstyle
             case SP_DesktopIcon: return KIcon( "user-desktop" );
             case SP_TrashIcon: return KIcon( "user-trash" );
@@ -8225,7 +8224,76 @@ namespace Oxygen
             case SP_MediaSeekBackward: return KIcon( "media-seek-backward" );
             case SP_MediaVolume: return KIcon( "audio-volume-medium" );
             case SP_MediaVolumeMuted: return KIcon( "audio-volume-muted" );
+*/
+            case SP_DesktopIcon:
+            case SP_TrashIcon:
+            case SP_ComputerIcon:
+            case SP_DriveFDIcon:
+            case SP_DriveHDIcon:
+            case SP_DriveCDIcon:
+            case SP_DriveDVDIcon:
+            case SP_DriveNetIcon:
+            case SP_DirHomeIcon:
+            case SP_DirOpenIcon:
+            case SP_DirClosedIcon:
+            case SP_DirIcon:
 
+            //TODO: generate ( !? ) folder with link emblem
+            case SP_DirLinkIcon:
+
+            //TODO: look for a better icon
+            case SP_FileIcon:
+
+            //TODO: generate ( !? ) file with link emblem
+            case SP_FileLinkIcon:
+
+            //TODO: find correct icon
+            case SP_FileDialogStart:
+
+            //TODO: find correct icon
+            case SP_FileDialogEnd:
+
+            case SP_FileDialogToParent:
+            case SP_FileDialogNewFolder:
+            case SP_FileDialogDetailedView:
+            case SP_FileDialogInfoView:
+            case SP_FileDialogContentsView:
+            case SP_FileDialogListView:
+            case SP_FileDialogBack:
+            case SP_MessageBoxInformation:
+            case SP_MessageBoxWarning:
+            case SP_MessageBoxCritical:
+            case SP_MessageBoxQuestion:
+            case SP_DialogOkButton:
+            case SP_DialogCancelButton:
+            case SP_DialogHelpButton:
+            case SP_DialogOpenButton:
+            case SP_DialogSaveButton:
+            case SP_DialogCloseButton:
+            case SP_DialogApplyButton:
+            case SP_DialogResetButton:
+            case SP_DialogDiscardButton:
+            case SP_DialogYesButton:
+            case SP_DialogNoButton:
+            case SP_ArrowUp:
+            case SP_ArrowDown:
+            case SP_ArrowLeft:
+            case SP_ArrowRight:
+            case SP_ArrowBack:
+            case SP_ArrowForward:
+            case SP_BrowserReload:
+            case SP_BrowserStop:
+            case SP_MediaPlay:
+            case SP_MediaStop:
+            case SP_MediaPause:
+            case SP_MediaSkipForward:
+            case SP_MediaSkipBackward:
+            case SP_MediaSeekForward:
+            case SP_MediaSeekBackward:
+            case SP_MediaVolume:
+            case SP_MediaVolumeMuted:
+            return QCommonStyle::standardIconImplementation( standardIcon, option, widget );
+// 10110111: End stub
             default: break;
 
         }

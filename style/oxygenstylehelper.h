@@ -48,7 +48,7 @@ namespace Oxygen
         public:
 
         //! constructor
-        explicit StyleHelper( const QByteArray &componentName );
+        explicit StyleHelper();
 
         //! destructor
         virtual ~StyleHelper() {}
