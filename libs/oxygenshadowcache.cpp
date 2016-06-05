@@ -25,8 +25,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenshadowcache.h"
-#include "oxygenactiveshadowconfiguration.h"
-#include "oxygeninactiveshadowconfiguration.h"
+#include "oxygenshadow_config.h"
 
 #include <cassert>
 #include <cmath>

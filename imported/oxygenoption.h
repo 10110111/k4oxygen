@@ -29,6 +29,7 @@
 #include <set>
 #include <sstream>
 #include <string>
+#include "oxygen_export.h"
 
 class QColor;
 
@@ -142,7 +143,7 @@ namespace Oxygen
         return firstIter == end() && secondIter == other.end();
     }
 
-    std::istream& operator >> (std::istream& stream, QColor& color);
+    OXYGEN_EXPORT std::istream& operator >> (std::istream& stream, QColor& color);
 }
 
 #endif

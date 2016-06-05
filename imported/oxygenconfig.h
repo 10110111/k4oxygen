@@ -230,6 +230,14 @@ public:
     int currentSize(Group group) const;
 };
 
+class KDE_EXPORT OxygenConfig : public OptionMap
+{
+    void reparseConfiguration();
+public:
+    OxygenConfig();
+    static OxygenConfig* self();
+};
+
 }
 
 #endif

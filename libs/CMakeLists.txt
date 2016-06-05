@@ -6,12 +6,7 @@ set(oxygenstyle_LIB_SRCS
     oxygenitemmodel.cpp
     oxygenshadowcache.cpp
     oxygentileset.cpp
-    oxygenutil.cpp
-)
-
-kde4_add_kcfg_files(oxygenstyle_LIB_SRCS
-  oxygenactiveshadowconfiguration.kcfgc
-  oxygeninactiveshadowconfiguration.kcfgc
+    oxygenshadow_config.cpp
 )
 
 add_library(oxygentransparentstyle SHARED ${oxygenstyle_LIB_SRCS})

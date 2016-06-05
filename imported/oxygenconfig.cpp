@@ -191,7 +191,6 @@ void KGlobalSettings::_k_slotNotifyChange(int changeType, int arg)
 void KSharedConfig::reparseConfiguration()
 {
     // TODO(10110111): parse kdeglobals
-    // FIXME(10110111): where should oxygenrc go?
 }
 
 KSharedConfig::KSharedConfig()
@@ -210,6 +209,22 @@ int KIconLoader::currentSize(Group group) const
     // TODO(10110111): this is a stub, implement it properly (see KIconLoaderPrivate::init()
     //       and KIconLoader::currentSize in kiconloader.cpp in kdelibs)
     return SizeMedium;
+}
+
+OxygenConfig* OxygenConfig::self()
+{
+    static OxygenConfig* self=new OxygenConfig();
+    return self;
+}
+
+void OxygenConfig::reparseConfiguration()
+{
+    // TODO(10110111): parse oxygenrc
+}
+
+OxygenConfig::OxygenConfig()
+{
+    // TODO(10110111): load config
 }
 
 }
