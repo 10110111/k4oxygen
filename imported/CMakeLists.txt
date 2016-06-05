@@ -1,5 +1,7 @@
 project(kstyle-oxygen-transparent)
 
+include_directories (../imported/)
+
 set(oxygen_imported_SRCS
     oxygenconfig.cpp
     oxygenoptionmap.cpp
@@ -17,4 +19,4 @@ if ( X11_FOUND )
 endif( X11_FOUND )
 
 set_target_properties(oxygen-imported PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS oxygen-imported ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS oxygen-imported LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR})

@@ -11,14 +11,14 @@ set(oxygenstyle_LIB_SRCS
 
 add_library(oxygentransparentstyle SHARED ${oxygenstyle_LIB_SRCS})
 
-target_link_libraries(oxygentransparentstyle ${KDE4_KDEUI_LIBS} oxygen-imported)
+target_link_libraries(oxygentransparentstyle ${QT_LIBRARIES} oxygen-imported)
 
 if ( X11_FOUND )
    target_link_libraries(oxygentransparentstyle ${X11_LIBRARIES})
 endif( X11_FOUND )
 
 set_target_properties(oxygentransparentstyle PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS oxygentransparentstyle ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS oxygentransparentstyle LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR})
 
 # next target
 #set(oxygenstyleconfig_LIB_SRCS
