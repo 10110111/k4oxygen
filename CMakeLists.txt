@@ -6,6 +6,7 @@ include (MacroLibrary)
 
 find_package(KDE4Workspace 4.9.80 REQUIRED)
 
+set(CMAKE_AUTOMOC ON)
 find_package(Qt4 4.8 REQUIRED QtCore QtDBus QtGui)
 include(${QT_USE_FILE})
 

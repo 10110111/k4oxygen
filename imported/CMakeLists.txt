@@ -9,8 +9,7 @@ set(oxygen_imported_SRCS
     kcolorhelpers.cpp
     kcolorspaces.cpp
    )
-
-kde4_add_library(oxygen-imported SHARED ${oxygen_imported_SRCS})
+add_library(oxygen-imported SHARED ${oxygen_imported_SRCS})
 
 target_link_libraries(oxygen-imported ${QT_LIBRARIES})
 
