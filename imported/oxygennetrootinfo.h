@@ -2,7 +2,7 @@
 #define OXYGEN_NETWM_20160605
 
 #include <X11/Xlib.h>
-#include <kdemacros.h>
+#include "oxygenmacros.h"
 
 namespace Oxygen
 {

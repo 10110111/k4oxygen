@@ -26,7 +26,7 @@
 */
 
 #include "oxygenoption.h"
-#include <kdeui_export.h>
+#include "oxygenmacros.h"
 
 #include <map>
 #include <set>
@@ -35,7 +35,7 @@
 namespace Oxygen
 {
     // all options from kde globals
-    class KDEUI_EXPORT OptionMap: public std::map<std::string, Option::Set>
+    class KDE_EXPORT OptionMap: public std::map<std::string, Option::Set>
     {
         public:
 

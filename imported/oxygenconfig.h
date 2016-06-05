@@ -4,7 +4,6 @@
 #include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <kdemacros.h>
 #include "oxygenoptionmap.h"
 
 // From kglobalsettings.h

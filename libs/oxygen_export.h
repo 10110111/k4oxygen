@@ -21,7 +21,7 @@
 #define OXYGEN_EXPORT_H
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
-#include <kdemacros.h>
+#include "oxygenmacros.h"
 
 #ifndef OXYGEN_EXPORT
 # if defined(MAKE_OXYGENSTYLE_LIB)

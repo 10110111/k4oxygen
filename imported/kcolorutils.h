@@ -22,7 +22,7 @@
 #ifndef KCOLORUTILS_H
 #define KCOLORUTILS_H
 
-#include <kdeui_export.h>
+#include "oxygenmacros.h"
 #include <QtGui/QPainter>
 
 class QColor;

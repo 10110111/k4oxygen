@@ -20,7 +20,7 @@
 #ifndef KCOLORSCHEME_H
 #define KCOLORSCHEME_H
 
-#include <kdeui_export.h>
+#include "oxygenmacros.h"
 #include <oxygenconfig.h>
 
 #include <QtCore/QExplicitlySharedDataPointer>
