@@ -1,11 +1,22 @@
-project(kstyle-k4oxygen)
+include_directories (animations debug transitions . ../libs/ ../libs/imported/ ${CMAKE_BINARY_DIR}/style/)
 
-#add_subdirectory( config )
-
-include_directories (animations debug transitions ../style/ ../libs/ ../libs/imported/ ${CMAKE_BINARY_DIR}/style/)
-
-########### next target ###############
-
+set(oxygenstyle_LIB_SRCS
+    ../libs/oxygenanimation.cpp
+    ../libs/oxygenhelper.cpp
+    ../libs/oxygenitemmodel.cpp
+    ../libs/oxygenshadowcache.cpp
+    ../libs/oxygentileset.cpp
+    ../libs/oxygenshadow_config.cpp
+)
+set(oxygen_imported_SRCS
+    ../libs/imported/oxygenconfig.cpp
+    ../libs/imported/oxygenoptionmap.cpp
+    ../libs/imported/oxygennetrootinfo.cpp
+    ../libs/imported/kcolorscheme.cpp
+    ../libs/imported/kcolorutils.cpp
+    ../libs/imported/kcolorhelpers.cpp
+    ../libs/imported/kcolorspaces.cpp
+   )
 set(k4oxygen_PART_SRCS
     animations/oxygenanimations.cpp
     animations/oxygenanimationdata.cpp
@@ -65,15 +76,13 @@ set(k4oxygen_PART_SRCS
 )
 
 # emulate what kde4_add_plugin would do
-add_library(k4oxygen SHARED ${k4oxygen_PART_SRCS})
-set_target_properties(k4oxygen PROPERTIES
-                      PREFIX ""
-                      )
+add_library(k4oxygen SHARED ${k4oxygen_PART_SRCS} ${oxygenstyle_LIB_SRCS} ${oxygen_imported_SRCS})
+set_target_properties(k4oxygen PROPERTIES PREFIX "")
 
-target_link_libraries(k4oxygen  ${QT_LIBRARIES} k4oxygenstyle)
+target_link_libraries(k4oxygen  ${QT_LIBRARIES})
 
 if ( X11_FOUND )
    target_link_libraries(k4oxygen ${X11_LIBRARIES})
 endif( X11_FOUND )
 
-install(TARGETS k4oxygen LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS k4oxygen LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
