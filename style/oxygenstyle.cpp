@@ -8171,7 +8171,11 @@ namespace Oxygen
             case SP_MediaSeekBackward:
             case SP_MediaVolume:
             case SP_MediaVolumeMuted:
+        #if QT_VERSION >= 0x50000
+            return QCommonStyle::standardIcon( standardIcon, option, widget );
+        #else
             return QCommonStyle::standardIconImplementation( standardIcon, option, widget );
+        #endif
 // 10110111: End stub
             default: break;
 
@@ -8323,7 +8327,11 @@ namespace Oxygen
             }
 
             default:
+        #if QT_VERSION >= 0x50000
+            return QCommonStyle::standardIcon( standardIcon, option, widget );
+        #else
             return QCommonStyle::standardIconImplementation( standardIcon, option, widget );
+        #endif
         }
     }
 
