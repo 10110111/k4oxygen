@@ -2,7 +2,7 @@ project(kstyle-k4oxygen)
 
 #add_subdirectory( config )
 
-include_directories (animations debug transitions ../style/ ../libs/ ../imported/ ${CMAKE_BINARY_DIR}/style/)
+include_directories (animations debug transitions ../style/ ../libs/ ../libs/imported/ ${CMAKE_BINARY_DIR}/style/)
 
 ########### next target ###############
 
@@ -70,7 +70,7 @@ set_target_properties(k4oxygen PROPERTIES
                       PREFIX ""
                       )
 
-target_link_libraries(k4oxygen  ${QT_LIBRARIES} k4oxygenstyle oxygen-imported)
+target_link_libraries(k4oxygen  ${QT_LIBRARIES} k4oxygenstyle)
 
 if ( X11_FOUND )
    target_link_libraries(k4oxygen ${X11_LIBRARIES})
