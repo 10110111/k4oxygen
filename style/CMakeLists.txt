@@ -2,7 +2,7 @@ project(kstyle-k4oxygen)
 
 #add_subdirectory( config )
 
-include_directories (animations debug transitions ../style/ ../libs/ ../imported/)
+include_directories (animations debug transitions ../style/ ../libs/ ../imported/ ${CMAKE_BINARY_DIR}/style/)
 
 ########### next target ###############
 

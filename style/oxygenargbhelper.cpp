@@ -64,9 +64,10 @@ namespace Oxygen
     {
 
         // get application full path
-        if( app->argc() < 1 ) return;
+        QStringList argv=app->arguments();
+        if( argv.isEmpty() ) return;
 
-        QString appName( app->argv()[0] );
+        QString appName(argv[0]);
         int position( appName.lastIndexOf( '/' ) );
         if( position >= 0 ) appName.remove( 0, position+1 );
 

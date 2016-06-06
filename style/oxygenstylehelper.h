@@ -262,8 +262,13 @@ namespace Oxygen
         if( compositingActive() )
         {
 
+        #if QT_VERSION >= 0x50000
+            return widget && widget->testAttribute(Qt::WA_TranslucentBackground);
+        #else
+            // This does work reliably in Qt4, unlike the version for Qt5
             if( widget ) return widget->x11Info().depth() == 32;
             else return QX11Info().appDepth() == 32;
+        #endif
 
         } else return false;
     }

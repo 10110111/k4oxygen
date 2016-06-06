@@ -105,6 +105,10 @@ namespace Oxygen
     //! style plugin
     class StylePlugin : public QStylePlugin
     {
+        Q_OBJECT
+    #if QT_VERSION >= 0x50000
+        Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "oxygen.json")
+    #endif
         public:
 
         //! returns list of valid keys
@@ -121,8 +125,11 @@ namespace Oxygen
     };
 
 }
+#include "oxygenstyle.moc"
 
+#if QT_VERSION < 0x50000
 Q_EXPORT_PLUGIN2( oxygen-qt, Oxygen::StylePlugin )
+#endif
 
 namespace Oxygen
 {
