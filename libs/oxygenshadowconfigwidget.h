@@ -26,8 +26,8 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <KConfig>
-#include <QtGui/QCheckBox>
-#include <QtGui/QGroupBox>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QGroupBox>
 
 #include "oxygen_export.h"
 

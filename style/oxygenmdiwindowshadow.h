@@ -34,7 +34,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QSet>
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QtGui/QPaintEvent>
 #include "kcolorscheme.h"
 

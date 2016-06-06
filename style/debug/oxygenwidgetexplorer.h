@@ -31,7 +31,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include <QtCore/QSet>
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 namespace Oxygen
 {

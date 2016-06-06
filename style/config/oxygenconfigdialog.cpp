@@ -27,8 +27,8 @@
 
 #include <QtCore/QTextStream>
 #include <QtCore/QTimer>
-#include <QtGui/QLabel>
-#include <QtGui/QShortcut>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QShortcut>
 
 #include <KConfigGroup>
 #include <KGlobalSettings>

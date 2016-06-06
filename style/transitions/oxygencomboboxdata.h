@@ -32,8 +32,8 @@
 #include <QtCore/QString>
 #include <QtCore/QBasicTimer>
 #include <QtCore/QTimerEvent>
-#include <QtGui/QComboBox>
-#include <QtGui/QLineEdit>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QLineEdit>
 
 namespace Oxygen
 {

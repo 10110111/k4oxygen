@@ -31,7 +31,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QBasicTimer>
-#include <QtGui/QLineEdit>
+#include <QtWidgets/QLineEdit>
 
 namespace Oxygen
 {

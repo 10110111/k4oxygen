@@ -31,8 +31,8 @@
 #include "oxygenanimationconfigitem.h"
 
 #include <QtCore/QWeakPointer>
-#include <QtGui/QFrame>
-#include <QtGui/QSpinBox>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QSpinBox>
 
 class Ui_GenericAnimationConfigBox;
 

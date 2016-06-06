@@ -28,15 +28,15 @@
 #include "oxygenshadowcache.h"
 #include "oxygenstylehelper.h"
 
-#include <QtGui/QDockWidget>
-#include <QtGui/QMenu>
+#include <QtWidgets/QDockWidget>
+#include <QtWidgets/QMenu>
 #include <QtGui/QPainter>
-#include <QtGui/QToolBar>
+#include <QtWidgets/QToolBar>
 #include <QtCore/QTextStream>
 #include <QtCore/QEvent>
 
 #ifdef Q_WS_X11
-#include <QtGui/QX11Info>
+#include <QtX11Extras/QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif

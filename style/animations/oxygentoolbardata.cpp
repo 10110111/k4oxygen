@@ -26,7 +26,7 @@
 
 #include "oxygentoolbardata.h"
 
-#include <QtGui/QToolButton>
+#include <QtWidgets/QToolButton>
 
 namespace Oxygen
 {

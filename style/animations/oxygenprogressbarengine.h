@@ -35,8 +35,8 @@
 #include <QtCore/QSet>
 #include <QtCore/QObject>
 #include <QtCore/QTimerEvent>
-#include <QtGui/QWidget>
-#include <QtGui/QProgressBar>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QProgressBar>
 
 namespace Oxygen
 {

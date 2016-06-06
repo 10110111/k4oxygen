@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenmenubardata.h"
-#include <QtGui/QMenu>
+#include <QtWidgets/QMenu>
 
 namespace Oxygen
 {

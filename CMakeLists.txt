@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 project(k4oxygen)
 
 set(CMAKE_AUTOMOC ON)
-find_package(Qt4 4.8 REQUIRED QtCore QtDBus QtGui)
-include(${QT_USE_FILE})
+find_package(Qt5 5.5 REQUIRED Core DBus Gui)
+set(QT_LIBRARIES ${Qt5Core_LIBRARIES} ${QT5DBus_LIBRARIES} ${Qt5Gui_LIBRARIES})
+set(QT_INCLUDES ${Qt5Core_INCLUDE_DIRS} ${QT5DBus_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS})
+message("QT libs: ${QT_LIBRARIES}")
+message("Qt includes: ${QT_INCLUDES}")
 
 if(NOT DEFINED LIBRARY_INSTALL_DIR)
     set(LIBRARY_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib)

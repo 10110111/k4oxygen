@@ -29,7 +29,7 @@
 
 #include "oxygentransitiondata.h"
 
-#include <QtGui/QStackedWidget>
+#include <QtWidgets/QStackedWidget>
 
 namespace Oxygen
 {

@@ -31,7 +31,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QTime>
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 namespace Oxygen
 {

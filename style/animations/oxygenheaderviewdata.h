@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenanimationdata.h"
-#include <QtGui/QHeaderView>
+#include <QtWidgets/QHeaderView>
 
 namespace Oxygen
 {

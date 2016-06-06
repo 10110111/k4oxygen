@@ -30,7 +30,7 @@
 #include "oxygengenericanimationconfigitem.h"
 #include "oxygenstyleconfigdata.h"
 
-#include <QtGui/QButtonGroup>
+#include <QtWidgets/QButtonGroup>
 #include <QtGui/QHoverEvent>
 #include <QtCore/QTextStream>
 #include <KLocale>

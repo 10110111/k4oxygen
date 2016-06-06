@@ -22,13 +22,13 @@
 
 #include "oxygenhelper.h"
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include <QtGui/QPainter>
 
 #include <math.h>
 
 #ifdef Q_WS_X11
-#include <QtGui/QX11Info>
+#include <QtX11Extras/QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <fixx11h.h>

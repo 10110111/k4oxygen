@@ -30,21 +30,21 @@
 #include "oxygenpropertynames.h"
 #include "oxygenstyleconfigdata.h"
 
-#include <QtGui/QAbstractItemView>
-#include <QtGui/QComboBox>
-#include <QtGui/QDial>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLineEdit>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMdiSubWindow>
-#include <QtGui/QScrollBar>
-#include <QtGui/QSpinBox>
-#include <QtGui/QSplitterHandle>
-#include <QtGui/QTextEdit>
-#include <QtGui/QToolBar>
-#include <QtGui/QToolBox>
-#include <QtGui/QToolButton>
-#include <QtGui/QGroupBox>
+#include <QtWidgets/QAbstractItemView>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDial>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMdiSubWindow>
+#include <QtWidgets/QScrollBar>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QSplitterHandle>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QToolBar>
+#include <QtWidgets/QToolBox>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QGroupBox>
 
 namespace Oxygen
 {

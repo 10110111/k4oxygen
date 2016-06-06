@@ -21,7 +21,7 @@
 
 #include <QtGui/QColor>
 #include <QtGui/QBrush>
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 namespace Oxygen
 {

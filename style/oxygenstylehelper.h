@@ -25,7 +25,7 @@
 #include "oxygenhelper.h"
 #include "oxygenanimationmodes.h"
 
-#include <QtGui/QX11Info>
+#include <QtX11Extras/QX11Info>
 #include <X11/Xdefs.h>
 
 //! helper class
