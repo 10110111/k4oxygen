@@ -29,7 +29,7 @@
 
 #include "ui_oxygenanimationconfigwidget.h"
 
-#include <QtWidgets/QButtonGroup>
+#include <QButtonGroup>
 #include <QtGui/QHoverEvent>
 #include <QtCore/QTextStream>
 #include <KLocale>

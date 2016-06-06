@@ -34,11 +34,11 @@
 
 #include <QtCore/QEvent>
 #include <QtCore/QVector>
-#include <QtWidgets/QProgressBar>
-#include <QtWidgets/QPushButton>
+#include <QProgressBar>
+#include <QPushButton>
 
 #ifdef Q_WS_X11
-#include <QtX11Extras/QX11Info>
+#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif

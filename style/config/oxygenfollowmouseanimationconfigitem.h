@@ -32,9 +32,9 @@
 #include <KComboBox>
 
 #include <QtCore/QWeakPointer>
-#include <QtWidgets/QFrame>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QSpinBox>
+#include <QFrame>
+#include <QLabel>
+#include <QSpinBox>
 
 class Ui_FollowMouseAnimationConfigBox;
 

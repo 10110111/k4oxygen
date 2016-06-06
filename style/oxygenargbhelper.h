@@ -35,8 +35,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QSet>
 #include <QtCore/QStringList>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QWidget>
+#include <QApplication>
+#include <QWidget>
 
 #ifdef Q_WS_X11
 #include <X11/Xdefs.h>

@@ -30,8 +30,8 @@
 #include "oxygenmdiwindowshadow.h"
 #include "oxygenshadowcache.h"
 
-#include <QtWidgets/QMdiArea>
-#include <QtWidgets/QMdiSubWindow>
+#include <QMdiArea>
+#include <QMdiSubWindow>
 #include <QtGui/QPainter>
 #include <QtCore/QTextStream>
 

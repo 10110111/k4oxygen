@@ -29,8 +29,8 @@
 
 #include "oxygengenericdata.h"
 
-#include <QtWidgets/QStyle>
-#include <QtWidgets/QStyleOptionSlider>
+#include <QStyle>
+#include <QStyleOptionSlider>
 
 namespace Oxygen
 {

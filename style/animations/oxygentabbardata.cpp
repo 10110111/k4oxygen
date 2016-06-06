@@ -29,7 +29,7 @@
 #include "oxygentabbardata.h"
 
 #include <QtGui/QHoverEvent>
-#include <QtWidgets/QTabBar>
+#include <QTabBar>
 
 namespace Oxygen
 {

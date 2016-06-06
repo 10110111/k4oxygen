@@ -38,7 +38,7 @@
 #include <QtCore/QString>
 #include <QtCore/QWeakPointer>
 
-#include <QtWidgets/QWidget>
+#include <QWidget>
 
 namespace Oxygen
 {

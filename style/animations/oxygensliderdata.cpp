@@ -27,8 +27,8 @@
 #include "oxygensliderdata.h"
 
 #include <QtGui/QHoverEvent>
-#include <QtWidgets/QSlider>
-#include <QtWidgets/QStyleOptionSlider>
+#include <QSlider>
+#include <QStyleOptionSlider>
 
 Q_GUI_EXPORT QStyleOptionSlider qt_qsliderStyleOption(QSlider*);
 

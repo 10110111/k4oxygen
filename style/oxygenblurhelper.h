@@ -39,10 +39,10 @@
 #include <QtCore/QSet>
 #include <QtCore/QTimerEvent>
 
-#include <QtWidgets/QDockWidget>
-#include <QtWidgets/QMenu>
+#include <QDockWidget>
+#include <QMenu>
 #include <QtGui/QRegion>
-#include <QtWidgets/QToolBar>
+#include <QToolBar>
 
 #ifdef Q_WS_X11
 #include <X11/Xdefs.h>

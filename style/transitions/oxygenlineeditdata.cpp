@@ -29,12 +29,12 @@
 #include "oxygenlineeditdata.h"
 
 #include <QtCore/QEvent>
-#include <QtWidgets/QDateTimeEdit>
-#include <QtWidgets/QDoubleSpinBox>
+#include <QDateTimeEdit>
+#include <QDoubleSpinBox>
 #include <QtGui/QPainter>
-#include <QtWidgets/QSpinBox>
-#include <QtWidgets/QStyle>
-#include <QtWidgets/QStyleOptionFrameV2>
+#include <QSpinBox>
+#include <QStyle>
+#include <QStyleOptionFrameV2>
 
 namespace Oxygen
 {

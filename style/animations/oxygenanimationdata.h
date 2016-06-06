@@ -30,7 +30,7 @@
 #include <QtCore/QEvent>
 #include <QtCore/QObject>
 #include <QtCore/QWeakPointer>
-#include <QtWidgets/QWidget>
+#include <QWidget>
 
 #include <cmath>
 

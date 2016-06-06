@@ -28,7 +28,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenanimationdata.h"
-#include <QtWidgets/QMenuBar>
+#include <QMenuBar>
 #include <QtCore/QBasicTimer>
 #include <QtCore/QWeakPointer>
 

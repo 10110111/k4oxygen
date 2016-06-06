@@ -31,7 +31,7 @@
 
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
-#include <QtWidgets/QWidget>
+#include <QWidget>
 #include <QtGui/QLinearGradient>
 #include <QtCore/QCache>
 #include <QtCore/QMap>

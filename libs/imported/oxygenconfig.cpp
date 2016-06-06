@@ -1,5 +1,5 @@
 #include "oxygenconfig.h"
-#include <QtWidgets/QApplication>
+#include <QApplication>
 #include <QtDBus/QtDBus>
 
 namespace Oxygen

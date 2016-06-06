@@ -29,7 +29,7 @@
 #include <cassert>
 #include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
-#include <QtWidgets/QStyleOption>
+#include <QStyleOption>
 #include <QtCore/QCoreApplication>
 #include <QtCore/QTextStream>
 

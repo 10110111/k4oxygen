@@ -32,8 +32,8 @@
 
 #include <KGlobal>
 #include <KLocale>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QLayout>
+#include <QLabel>
+#include <QLayout>
 
 namespace Oxygen
 {

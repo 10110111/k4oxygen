@@ -29,8 +29,8 @@
 
 #include "oxygen_export.h"
 
-#include <QtWidgets/QAbstractButton>
-#include <QtWidgets/QWidget>
+#include <QAbstractButton>
+#include <QWidget>
 #include <cassert>
 
 class Ui_AnimationConfigItem;

@@ -23,7 +23,7 @@
 #include "oxygenmnemonics.h"
 
 #include <QtGui/QKeyEvent>
-#include <QtWidgets/QWidget>
+#include <QWidget>
 
 namespace Oxygen
 {

@@ -29,7 +29,7 @@
 
 #include "oxygenanimationdata.h"
 
-#include <QtWidgets/QTabBar>
+#include <QTabBar>
 
 namespace Oxygen
 {

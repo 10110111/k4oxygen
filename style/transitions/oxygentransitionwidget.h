@@ -29,7 +29,7 @@
 #include "oxygenanimation.h"
 
 #include <QtCore/QWeakPointer>
-#include <QtWidgets/QWidget>
+#include <QWidget>
 
 #include <cmath>
 

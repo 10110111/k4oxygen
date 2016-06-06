@@ -29,9 +29,9 @@
 
 #include "oxygen_export.h"
 
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QLayout>
-#include <QtWidgets/QCheckBox>
+#include <QWidget>
+#include <QLayout>
+#include <QCheckBox>
 
 class Ui_AnimationConfigWidget;
 

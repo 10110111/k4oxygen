@@ -31,10 +31,10 @@
 #include <QtCore/QMap>
 #include <QtCore/QWeakPointer>
 #include <QtGui/QHoverEvent>
-#include <QtWidgets/QMainWindow>
+#include <QMainWindow>
 #include <QtGui/QMouseEvent>
-#include <QtWidgets/QSplitterHandle>
-#include <QtWidgets/QWidget>
+#include <QSplitterHandle>
+#include <QWidget>
 
 #include "oxygenaddeventfilter.h"
 

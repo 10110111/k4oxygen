@@ -31,7 +31,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QBasicTimer>
-#include <QtWidgets/QLabel>
+#include <QLabel>
 
 namespace Oxygen
 {

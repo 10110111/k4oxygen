@@ -26,7 +26,7 @@
 
 #include "oxygenprogressbardata.h"
 
-#include <QtWidgets/QProgressBar>
+#include <QProgressBar>
 #include <cassert>
 
 namespace Oxygen

@@ -52,15 +52,15 @@
 #include "oxygentileset.h"
 
 #include <QtCore/QMap>
-#include <QtWidgets/QAbstractScrollArea>
-#include <QtWidgets/QCommonStyle>
-#include <QtWidgets/QDockWidget>
-#include <QtWidgets/QMdiSubWindow>
-#include <QtWidgets/QStyleOption>
-#include <QtWidgets/QStyleOptionSlider>
-#include <QtWidgets/QToolBar>
-#include <QtWidgets/QToolBox>
-#include <QtWidgets/QWidget>
+#include <QAbstractScrollArea>
+#include <QCommonStyle>
+#include <QDockWidget>
+#include <QMdiSubWindow>
+#include <QStyleOption>
+#include <QStyleOptionSlider>
+#include <QToolBar>
+#include <QToolBox>
+#include <QWidget>
 
 namespace Oxygen
 {

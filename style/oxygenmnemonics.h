@@ -25,7 +25,7 @@
 
 #include <QtCore/QEvent>
 #include <QtCore/QObject>
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 #include "oxygenstyleconfigdata.h"
 

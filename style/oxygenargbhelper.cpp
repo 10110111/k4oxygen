@@ -29,11 +29,11 @@
 
 #include "oxygenargbhelper.h"
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 #include <QtGui/QIcon>
 
 #ifdef Q_WS_X11
-#include <QtX11Extras/QX11Info>
+#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif

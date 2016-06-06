@@ -27,7 +27,7 @@
 #include "oxygenwidgetexplorer.h"
 
 #include <QtCore/QTextStream>
-#include <QtWidgets/QApplication>
+#include <QApplication>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPainter>
 
