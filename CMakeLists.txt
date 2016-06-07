@@ -11,6 +11,15 @@ if("${QT_VERSION}" STREQUAL 5 OR "${QT_VERSION}" STREQUAL Qt5)
     set(QT_LIBRARIES Qt5::Core Qt5::DBus Qt5::Gui Qt5::Widgets Qt5::X11Extras)
     # Re-enable deprecated QWeakPointer<QObject*>
     add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
+    if(NOT DEFINED PLUGIN_INSTALL_DIR)
+        find_package(Qt5Core)
+        get_target_property(QMakeExecutable ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+        execute_process(COMMAND "${QMakeExecutable}" -query QT_INSTALL_PLUGINS
+                        OUTPUT_VARIABLE Qt5PluginInstallDir
+                        ERROR_QUIET
+                        OUTPUT_STRIP_TRAILING_WHITESPACE)
+        set(PLUGIN_INSTALL_DIR "${Qt5PluginInstallDir}/styles/")
+    endif()
 elseif("${QT_VERSION}" STREQUAL 4 OR "${QT_VERSION}" STREQUAL Qt4)
     message("++ Compiling style for for Qt 4")
     find_package(Qt4 4.8 REQUIRED QtCore QtDBus QtGui)
@@ -20,10 +29,6 @@ elseif("${QT_VERSION}" STREQUAL 4 OR "${QT_VERSION}" STREQUAL Qt4)
     endif()
 else()
     message(FATAL_ERROR "QT_VERSION must be either of 4, Qt4, 5, Qt5")
-endif()
-
-if(NOT DEFINED PLUGIN_INSTALL_DIR)
-    set(PLUGIN_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib/plugins/styles/)
 endif()
 
 message("++ Will install Qt plugin to ${PLUGIN_INSTALL_DIR}")
