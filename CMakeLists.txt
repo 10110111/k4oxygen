@@ -23,8 +23,6 @@ if("${QT_VERSION}" STREQUAL 5 OR "${QT_VERSION}" STREQUAL Qt5)
     endif()
     if (Qt5X11Extras_FOUND)
         set(X11_FOUND TRUE)
-        # Re-add the define removed in Qt5
-        add_definitions(-DQ_WS_X11)
     endif()
 elseif("${QT_VERSION}" STREQUAL 4 OR "${QT_VERSION}" STREQUAL Qt4)
     message("++ Compiling style for for Qt 4")
@@ -42,6 +40,7 @@ else()
 endif()
 
 if(X11_FOUND)
+    add_definitions(-DHAVE_X11=1)
     # XLib found, but we also need XCB
     find_package(PkgConfig)
     pkg_check_modules(XCB_PACKAGE x11-xcb)

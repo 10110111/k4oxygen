@@ -60,7 +60,7 @@
 
 #include "oxygenconfig.h"
 
-#ifdef Q_WS_X11
+#if HAVE_X11
 #include <QX11Info>
 #include "oxygennetrootinfo.h"
 #endif
@@ -614,7 +614,7 @@ namespace Oxygen
         if( useWMMoveResize() )
         {
 
-            #ifdef Q_WS_X11
+            #if HAVE_X11
             XUngrabPointer(QX11Info::display(), QX11Info::appTime());
             NETRootInfo rootInfo(QX11Info::display(), NET::WMMoveResize);
             rootInfo.moveResizeRequest( widget->window()->winId(), position.x(), position.y(), NET::Move);
@@ -641,7 +641,7 @@ namespace Oxygen
     bool WindowManager::supportWMMoveResize( void ) const
     {
 
-        #ifdef Q_WS_X11
+        #if HAVE_X11
         return true;
         #endif
 

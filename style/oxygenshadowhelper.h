@@ -35,7 +35,7 @@
 
 #include <stdint.h>
 
-#ifdef Q_WS_X11
+#if HAVE_X11
 #include <X11/Xdefs.h>
 #include <xcb/xcb.h>
 #endif
@@ -160,7 +160,7 @@ namespace Oxygen
         //! shadow size
         int _size;
 
-        #ifdef Q_WS_X11
+        #if HAVE_X11
         //! graphic context
         xcb_gcontext_t gc_;
 

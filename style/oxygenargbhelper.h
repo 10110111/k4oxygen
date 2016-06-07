@@ -38,7 +38,7 @@
 #include <QApplication>
 #include <QWidget>
 
-#ifdef Q_WS_X11
+#if HAVE_X11
 #include <X11/Xdefs.h>
 #endif
 
@@ -155,7 +155,7 @@ namespace Oxygen
         ObjectSet _transparentWidgets;
 
 
-        #ifdef Q_WS_X11
+        #if HAVE_X11
 
         //! XEmbed atom
         Atom _xEmbedAtom;
