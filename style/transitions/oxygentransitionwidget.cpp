@@ -84,7 +84,11 @@ namespace Oxygen
 
             rect = rect.translated( widget->mapTo( widget->window(), widget->rect().topLeft() ) );
             widget = widget->window();
+            #if QT_VERSION >= 0x50000
+            out = widget->grab(rect);
+            #else
             out = QPixmap::grabWidget( widget, rect );
+            #endif
 
         } else {
 
