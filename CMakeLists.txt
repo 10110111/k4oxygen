@@ -37,6 +37,15 @@ else()
     message(FATAL_ERROR "QT_VERSION must be either of 4, Qt4, 5, Qt5")
 endif()
 
+if(X11_FOUND)
+    # XLib found, but we also need XCB
+    find_package(PkgConfig)
+    pkg_check_modules(XCB_PACKAGE x11-xcb)
+    link_directories(${XCB_PACKAGE_LIBRARY_DIRS})
+    include_directories(${XCB_PACKAGE_INCLUDE_DIRS})
+    set(X11_LIBRARIES ${X11_LIBRARIES} ${XCB_PACKAGE_LIBRARIES})
+endif()
+
 message("++ Will install Qt plugin to ${PLUGIN_INSTALL_DIR}")
 
 set(GENERIC_LIB_VERSION 0.0.1)

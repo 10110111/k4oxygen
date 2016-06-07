@@ -39,6 +39,7 @@
 #include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/Xlib-xcb.h>
 #endif
 
 namespace Oxygen
@@ -47,6 +48,17 @@ namespace Oxygen
     const char* const ShadowHelper::netWMShadowAtomName( "_KDE_NET_WM_SHADOW" );
     const char* const ShadowHelper::netWMForceShadowPropertyName( "_KDE_NET_WM_FORCE_SHADOW" );
     const char* const ShadowHelper::netWMSkipShadowPropertyName( "_KDE_NET_WM_SKIP_SHADOW" );
+
+#ifdef Q_WS_X11
+    static inline xcb_connection_t* getXCBConnection()
+    {
+        return XGetXCBConnection(QX11Info::display());
+    }
+    static inline void freePixmap(PixmapHandle pixmap)
+    {
+        xcb_free_pixmap(getXCBConnection(),pixmap);
+    }
+#endif
 
     //_____________________________________________________
     ShadowHelper::ShadowHelper( QObject* parent, StyleHelper& helper ):
@@ -57,15 +69,27 @@ namespace Oxygen
         #ifdef Q_WS_X11
         ,_atom( None )
         #endif
-    {}
+    {
+        #ifdef Q_WS_X11
+        // Make a valid graphic context using a dummy pixmap
+        {
+            xcb_connection_t*const xcbc=getXCBConnection();
+            gc_=xcb_generate_id(xcbc);
+            xcb_pixmap_t dummyPixmap = xcb_generate_id(xcbc);
+            xcb_create_pixmap(xcbc, 32, dummyPixmap, QX11Info::appRootWindow(), 1, 1);
+            xcb_create_gc(xcbc,gc_,dummyPixmap,0,0);
+            xcb_free_pixmap(xcbc,dummyPixmap);
+        }
+        #endif
+    }
 
     //_______________________________________________________
     ShadowHelper::~ShadowHelper( void )
     {
 
         #ifdef Q_WS_X11
-        foreach( const Qt::HANDLE& value, _pixmaps  ) XFreePixmap( QX11Info::display(), value );
-        foreach( const Qt::HANDLE& value, _dockPixmaps  ) XFreePixmap( QX11Info::display(), value );
+        foreach( const PixmapHandle& value, _pixmaps  ) freePixmap(value);
+        foreach( const PixmapHandle& value, _dockPixmaps  ) freePixmap(value);
         #endif
 
         delete _shadowCache;
@@ -77,8 +101,8 @@ namespace Oxygen
     {
         #ifdef Q_WS_X11
         // round pixmaps
-        foreach( const Qt::HANDLE& value, _pixmaps  ) XFreePixmap( QX11Info::display(), value );
-        foreach( const Qt::HANDLE& value, _dockPixmaps  ) XFreePixmap( QX11Info::display(), value );
+        foreach( const PixmapHandle& value, _pixmaps  ) freePixmap(value);
+        foreach( const PixmapHandle& value, _dockPixmaps  ) freePixmap(value);
         #endif
 
         _pixmaps.clear();
@@ -237,7 +261,7 @@ namespace Oxygen
     }
 
     //______________________________________________
-    const QVector<Qt::HANDLE>& ShadowHelper::createPixmapHandles( bool isDockWidget )
+    const QVector<PixmapHandle>& ShadowHelper::createPixmapHandles( bool isDockWidget )
     {
 
         /*!
@@ -290,7 +314,7 @@ namespace Oxygen
     }
 
     //______________________________________________
-    Qt::HANDLE ShadowHelper::createPixmap( const QPixmap& source ) const
+    PixmapHandle ShadowHelper::createPixmap( const QPixmap& source ) const
     {
 
         // do nothing for invalid pixmaps
@@ -306,19 +330,16 @@ namespace Oxygen
         const int width( source.width() );
         const int height( source.height() );
 
+        xcb_connection_t*const xcbc=getXCBConnection();
         // create X11 pixmap
-        Pixmap pixmap = XCreatePixmap( QX11Info::display(), QX11Info::appRootWindow(), width, height, 32 );
+        xcb_pixmap_t pixmap = xcb_generate_id(xcbc);
+        xcb_create_pixmap(xcbc, 32, pixmap, QX11Info::appRootWindow(), width, height);
 
-        // create explicitly shared QPixmap from it
-        QPixmap dest( QPixmap::fromX11Pixmap( pixmap, QPixmap::ExplicitlyShared ) );
-
-        // create surface for pixmap
-        {
-            QPainter painter( &dest );
-            painter.setCompositionMode( QPainter::CompositionMode_Source );
-            painter.drawPixmap( 0, 0, source );
-        }
-
+        // Create image from QPixmap and push it to pixmap
+        QImage image=source.toImage();
+        xcb_put_image(xcbc,XCB_IMAGE_FORMAT_Z_PIXMAP,pixmap,gc_,
+                        image.width(),image.height(),0,0,
+                        0,32,image.byteCount(),image.constBits());
 
         return pixmap;
         #else
@@ -348,13 +369,13 @@ namespace Oxygen
 
         // create pixmap handles if needed
         const bool isDockWidget( this->isDockWidget( widget ) || this->isToolBar( widget ) );
-        const QVector<Qt::HANDLE>& pixmaps( createPixmapHandles( isDockWidget ) );
+        const QVector<PixmapHandle>& pixmaps( createPixmapHandles( isDockWidget ) );
         if( pixmaps.size() != numPixmaps ) return false;
 
         // create data
         // add pixmap handles
         QVector<unsigned long> data;
-        foreach( const Qt::HANDLE& value, pixmaps )
+        foreach( const PixmapHandle& value, pixmaps )
         { data.push_back( value ); }
 
         // add padding

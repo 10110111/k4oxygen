@@ -33,12 +33,16 @@
 #include <QtCore/QPointer>
 #include <QtCore/QMap>
 
+#include <stdint.h>
+
 #ifdef Q_WS_X11
 #include <X11/Xdefs.h>
+#include <xcb/xcb.h>
 #endif
 
 namespace Oxygen
 {
+    typedef uintptr_t PixmapHandle;
 
     //! forward declaration
     class ShadowCache;
@@ -109,10 +113,10 @@ namespace Oxygen
         { return *_shadowCache; }
 
         // create pixmap handles from tileset
-        const QVector<Qt::HANDLE>& createPixmapHandles( bool isDockWidget );
+        const QVector<PixmapHandle>& createPixmapHandles( bool isDockWidget );
 
         // create pixmap handle from pixmap
-        Qt::HANDLE createPixmap( const QPixmap& ) const;
+        PixmapHandle createPixmap( const QPixmap& ) const;
 
         //! install shadow X11 property on given widget
         /*!
@@ -149,14 +153,17 @@ namespace Oxygen
 
         //!@name pixmaps
         //@{
-        QVector<Qt::HANDLE> _pixmaps;
-        QVector<Qt::HANDLE> _dockPixmaps;
+        QVector<PixmapHandle> _pixmaps;
+        QVector<PixmapHandle> _dockPixmaps;
         //@}
 
         //! shadow size
         int _size;
 
         #ifdef Q_WS_X11
+        //! graphic context
+        xcb_gcontext_t gc_;
+
         //! shadow atom
         Atom _atom;
         #endif
