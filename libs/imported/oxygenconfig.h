@@ -227,7 +227,10 @@ public:
         User
     };
     static KIconLoader* global();
+    KIconLoader();
     int currentSize(Group group) const;
+private:
+    int sizes[LastGroup];
 };
 
 class KDE_EXPORT OxygenConfig : public OptionMap

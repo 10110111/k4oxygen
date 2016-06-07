@@ -204,11 +204,30 @@ KIconLoader* KIconLoader::global()
     return loader;
 }
 
+KIconLoader::KIconLoader()
+{
+    // Code similar to KIconLoaderPrivate::init() in kiconloader.cpp in kdelibs
+    static const char* const groups[LastGroup]={
+                                                "Desktop",
+                                                "Toolbar",
+                                                "MainToolbar",
+                                                "Small",
+                                                "Panel",
+                                                "Dialog"
+                                               };
+    // defaults from from KIconTheme::KIconTheme() in kicontheme.cpp in kdelibs
+    static const int defaultSizes[LastGroup]={32,22,22,16,32,32};
+    for(int i=FirstGroup;i<LastGroup;++i)
+    {
+        KConfigGroup g( KGlobal::config(), groups[i]+std::string("Icons") );
+        sizes[i]=g.readEntry("Size",defaultSizes[i]);
+    }
+}
+
 int KIconLoader::currentSize(Group group) const
 {
-    // TODO(10110111): this is a stub, implement it properly (see KIconLoaderPrivate::init()
-    //       and KIconLoader::currentSize in kiconloader.cpp in kdelibs)
-    return SizeMedium;
+    if(group<0 || group>=LastGroup) return -1;
+    return sizes[group];
 }
 
 OxygenConfig* OxygenConfig::self()
