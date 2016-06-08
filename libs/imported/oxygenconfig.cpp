@@ -1,9 +1,32 @@
 #include "oxygenconfig.h"
 #include <QApplication>
 #include <QtDBus/QtDBus>
+#include <QProcess>
+#include <QDir>
+#include <QProcessEnvironment>
 
 namespace Oxygen
 {
+
+QString userConfigDir()
+{
+    // Theres' no better way in Qt4. Although Qt5 has QStandardPaths, we'll do in one way for both Qt4 and Qt5.
+    return QProcessEnvironment::systemEnvironment().value("XDG_CONFIG_HOME",QDir::homePath()+"/.config");
+}
+
+QStringList getConfigPaths()
+{
+    QProcess process;
+    QStringList args; args << "--path" << "config";
+    process.start("kde4-config",args);
+    if(process.waitForFinished() && process.exitCode()==0)
+        return QString::fromUtf8(process.readAllStandardOutput()).trimmed().split(':');
+
+    // Resort to user config dir
+    QString dirName=userConfigDir()+"/k4oxygen";
+    if(QDir(dirName).exists()) return QStringList(dirName);
+    return QStringList();
+}
 
 namespace KGlobal
 {
@@ -190,12 +213,19 @@ void KGlobalSettings::_k_slotNotifyChange(int changeType, int arg)
 
 void KSharedConfig::reparseConfiguration()
 {
-    // TODO(10110111): parse kdeglobals
+    clear();
+    static const QStringList paths=getConfigPaths();
+    for(int i=paths.size()-1;i>=0;--i)
+    {
+        const QString filename = paths[i]+"/kdeglobals";
+        merge(OptionMap(filename.toUtf8().constData()));
+        // TODO: monitor the file for changes (see oxygen-gtk's monitorFile()
+    }
 }
 
 KSharedConfig::KSharedConfig()
 {
-    // TODO(10110111): load config
+    reparseConfiguration();
 }
 
 KIconLoader* KIconLoader::global()
@@ -238,13 +268,20 @@ OxygenConfig* OxygenConfig::self()
 
 void OxygenConfig::reparseConfiguration()
 {
-    // TODO(10110111): parse oxygenrc
-    // TODO(10110111): check that shadow configuration is also loaded
+    // TODO: deduplicate: maybe make OxygenConfig and KSharedConfig children of one base class
+    clear();
+    static const QStringList paths=getConfigPaths();
+    for(int i=paths.size()-1;i>=0;--i)
+    {
+        const QString filename = paths[i]+"/oxygenrc";
+        merge(OptionMap(filename.toUtf8().constData()));
+        // TODO: monitor the file for changes (see oxygen-gtk's monitorFile()
+    }
 }
 
 OxygenConfig::OxygenConfig()
 {
-    // TODO(10110111): load config
+    reparseConfiguration();
 }
 
 }
