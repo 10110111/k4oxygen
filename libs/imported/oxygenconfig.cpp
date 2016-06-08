@@ -210,23 +210,43 @@ void KGlobalSettings::_k_slotNotifyChange(int changeType, int arg)
 }
 
 
+ConfigBase::ConfigBase(const char* fileName)
+    : fileName(fileName)
+{
+    reparseConfiguration();
+}
 
-void KSharedConfig::reparseConfiguration()
+void ConfigBase::reparseConfiguration()
 {
     clear();
     static const QStringList paths=getConfigPaths();
     for(int i=paths.size()-1;i>=0;--i)
     {
-        const QString filename = paths[i]+"/kdeglobals";
-        merge(OptionMap(filename.toUtf8().constData()));
+        const QString filePath = paths[i]+"/"+fileName;
+        merge(OptionMap(filePath.toUtf8().constData()));
         // TODO: monitor the file for changes (see oxygen-gtk's monitorFile()
     }
 }
 
+// -------------------- KSharedConfig impl --------------------------
+
 KSharedConfig::KSharedConfig()
+    : ConfigBase("kdeglobals")
+{}
+
+// -------------------- OxygenConfig impl ---------------------------
+
+OxygenConfig* OxygenConfig::self()
 {
-    reparseConfiguration();
+    static OxygenConfig* self=new OxygenConfig();
+    return self;
 }
+
+OxygenConfig::OxygenConfig()
+    : ConfigBase("oxygenrc")
+{}
+
+// -------------------- KIconLoader impl ----------------------------
 
 KIconLoader* KIconLoader::global()
 {
@@ -258,30 +278,6 @@ int KIconLoader::currentSize(Group group) const
 {
     if(group<0 || group>=LastGroup) return -1;
     return sizes[group];
-}
-
-OxygenConfig* OxygenConfig::self()
-{
-    static OxygenConfig* self=new OxygenConfig();
-    return self;
-}
-
-void OxygenConfig::reparseConfiguration()
-{
-    // TODO: deduplicate: maybe make OxygenConfig and KSharedConfig children of one base class
-    clear();
-    static const QStringList paths=getConfigPaths();
-    for(int i=paths.size()-1;i>=0;--i)
-    {
-        const QString filename = paths[i]+"/oxygenrc";
-        merge(OptionMap(filename.toUtf8().constData()));
-        // TODO: monitor the file for changes (see oxygen-gtk's monitorFile()
-    }
-}
-
-OxygenConfig::OxygenConfig()
-{
-    reparseConfiguration();
 }
 
 }

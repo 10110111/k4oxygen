@@ -29,30 +29,39 @@
 namespace Oxygen
 {
 
+class ConfigBase;
 class KSharedConfig;
 typedef KSharedConfig* KSharedConfigPtr;
 typedef KSharedConfig const* KSharedConfigConstPtr;
 
 class KConfigGroup
 {
-    KSharedConfigConstPtr config;
+    ConfigBase const* config;
     std::string group;
 public:
-    KConfigGroup(KSharedConfigConstPtr config, const char* group) : config(config), group(group){}
-    KConfigGroup(KSharedConfigConstPtr config, std::string const& group) : config(config), group(group){}
-    KConfigGroup(KSharedConfigConstPtr config, QString const& group) : config(config),
+    KConfigGroup(ConfigBase const* config, const char* group) : config(config), group(group){}
+    KConfigGroup(ConfigBase const* config, std::string const& group) : config(config), group(group){}
+    KConfigGroup(ConfigBase const* config, QString const& group) : config(config),
                                                                          group(qPrintable(group)){}
     template<typename T>
     T readEntry(std::string const& key, T const& defaultValue) const;
 };
 
-class KDE_EXPORT KSharedConfig : public OptionMap
+class KDE_EXPORT ConfigBase : public OptionMap
 {
+protected:
+    QString fileName;
+    ConfigBase(const char* fileName);
 public:
-    KSharedConfig();
     void reparseConfiguration();
     KConfigGroup group(std::string const& groupName) const
     { return KConfigGroup(this, groupName); }
+};
+
+class KDE_EXPORT KSharedConfig : public ConfigBase
+{
+public:
+    KSharedConfig();
 };
 
 template<typename T>
@@ -233,9 +242,8 @@ private:
     int sizes[LastGroup];
 };
 
-class KDE_EXPORT OxygenConfig : public OptionMap
+class KDE_EXPORT OxygenConfig : public ConfigBase
 {
-    void reparseConfiguration();
 public:
     OxygenConfig();
     static OxygenConfig* self();
