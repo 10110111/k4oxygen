@@ -131,6 +131,15 @@ namespace Oxygen
 Q_EXPORT_PLUGIN2( oxygen-qt, Oxygen::StylePlugin )
 #endif
 
+// NOTE: this hack with function name doesn't work in header with Qt4: moc appears to not
+//  expand the macro and generate its code with unexpanded name. So only doing this here.
+#if QT_VERSION >= 0x50000
+// Qt5 has renamed this function
+#define STANDARD_ICON_IMPLEMENTATION standardIcon
+#else
+#define STANDARD_ICON_IMPLEMENTATION standardIconImplementation
+#endif
+
 namespace Oxygen
 {
 
@@ -8026,7 +8035,7 @@ namespace Oxygen
     }
 
     //____________________________________________________________________
-    QIcon Style::standardIconImplementation(
+    QIcon Style::STANDARD_ICON_IMPLEMENTATION(
         StandardPixmap standardIcon,
         const QStyleOption *option,
         const QWidget *widget ) const
@@ -8171,11 +8180,7 @@ namespace Oxygen
             case SP_MediaSeekBackward:
             case SP_MediaVolume:
             case SP_MediaVolumeMuted:
-        #if QT_VERSION >= 0x50000
-            return QCommonStyle::standardIcon( standardIcon, option, widget );
-        #else
-            return QCommonStyle::standardIconImplementation( standardIcon, option, widget );
-        #endif
+            return QCommonStyle::STANDARD_ICON_IMPLEMENTATION( standardIcon, option, widget );
 // 10110111: End stub
             default: break;
 
@@ -8327,11 +8332,7 @@ namespace Oxygen
             }
 
             default:
-        #if QT_VERSION >= 0x50000
-            return QCommonStyle::standardIcon( standardIcon, option, widget );
-        #else
-            return QCommonStyle::standardIconImplementation( standardIcon, option, widget );
-        #endif
+            return QCommonStyle::STANDARD_ICON_IMPLEMENTATION( standardIcon, option, widget );
         }
     }
 

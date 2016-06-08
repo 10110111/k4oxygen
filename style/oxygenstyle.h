@@ -206,7 +206,13 @@ namespace Oxygen
         { return pixelMetric(PM_DefaultLayoutSpacing, option, widget); }
 
         //! standard icons
-        virtual QIcon standardIconImplementation(
+        virtual QIcon
+        #if QT_VERSION >= 0x50000
+        standardIcon
+        #else
+        standardIconImplementation
+        #endif
+                                    (
             StandardPixmap standardIcon,
             const QStyleOption *option,
             const QWidget *widget) const;
