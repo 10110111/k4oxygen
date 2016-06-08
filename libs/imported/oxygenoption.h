@@ -25,14 +25,15 @@
 * MA 02110-1301, USA.
 */
 
-#include <iostream>
 #include <set>
 #include <sstream>
 #include <string>
 #include "oxygen_export.h"
+#include "oxygentypehelper.h"
 #include <QtCore/QTextStream>
 #include <QColor>
 #include <QStringList>
+#include <QMetaEnum>
 
 namespace Oxygen
 {
@@ -76,7 +77,10 @@ namespace Oxygen
         int toInt( int defaultValue ) const
         { return toVariant<int>( defaultValue ); }
 
-        template< typename T>  T toVariant( T = T() ) const;
+        template< typename T> typename enable_if<!EnumIsDeclared<T>::value,
+        T>::type toVariant( T = T() ) const;
+        template<typename T> typename enable_if<EnumIsDeclared<T>::value,
+        T>::type toVariant(T = T()) const;
 
         class Set: public std::set<Option>
         {
@@ -115,11 +119,11 @@ namespace Oxygen
 
             return out;
         }
-
     };
 
     //_______________________________________________________________________
-    template<typename T> T Option::toVariant( T defaultValue ) const
+    template<typename T> typename enable_if<!EnumIsDeclared<T>::value,
+    T>::type Option::toVariant( T defaultValue ) const
     {
         QVariant var(QString(_value.c_str()));
         return !_value.empty() && var.canConvert<T>() ? var.value<T>() : defaultValue;
@@ -127,6 +131,18 @@ namespace Oxygen
     // QColor-QString conversion via QVariant appears to look not how we want it in
     // KDE settings, so we implement it manually
     template<> QColor Option::toVariant(QColor defaultValue) const;
+    // enums also need special treatment... doesn't QVariant look useless?
+    template<typename T> typename enable_if<EnumIsDeclared<T>::value,
+    T>::type Option::toVariant(T defaultValue) const
+    {
+        const QMetaObject& mo=EnumIsDeclared<T>::EnclosingClass::staticMetaObject;
+        const int index=mo.indexOfEnumerator(_tag.c_str());
+        if(index==-1) return defaultValue;
+        int value=mo.enumerator(index).keyToValue(_value.c_str());
+        if(value==-1) return defaultValue;
+        return static_cast<T>(value);
+    }
+
 
     //_______________________________________________________________________
     bool Option::Set::operator == (const Option::Set& other ) const

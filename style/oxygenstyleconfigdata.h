@@ -2,12 +2,15 @@
 #define OXYGEN_STYLE_CONFIG_DATA_H_20160605
 
 #include "oxygenconfig.h"
+#include "oxygentypehelper.h"
 #include <QtCore/QStringList>
+#include <QObject>
 
 namespace Oxygen
 {
-class StyleConfigData
+class StyleConfigData : public QObject
 {
+    Q_OBJECT
     Q_ENUMS(MnemonicsMode)
     Q_ENUMS(ViewTriangularExpanderSize)
     Q_ENUMS(CheckBoxStyle)
@@ -195,6 +198,16 @@ public:
     static int comboBoxTransitionsDuration() { return self()->comboBoxTransitionsDuration_; }
     static int lineEditTransitionsDuration() { return self()->lineEditTransitionsDuration_; }
 };
+
+DECLARE_ENUM(StyleConfigData,MnemonicsMode);
+DECLARE_ENUM(StyleConfigData,ViewTriangularExpanderSize);
+DECLARE_ENUM(StyleConfigData,CheckBoxStyle);
+DECLARE_ENUM(StyleConfigData,MenuHighlightMode);
+DECLARE_ENUM(StyleConfigData,TabStyle);
+DECLARE_ENUM(StyleConfigData,WindowDragMode);
+DECLARE_ENUM(StyleConfigData,ToolBarAnimationType);
+DECLARE_ENUM(StyleConfigData,MenuBarAnimationType);
+DECLARE_ENUM(StyleConfigData,MenuAnimationType);
 }
 
 Q_DECLARE_METATYPE(Oxygen::StyleConfigData::MnemonicsMode)

@@ -16,4 +16,5 @@ template<> QColor Option::toVariant(QColor defaultValue) const
     return defaultValue;
 }
 
+
 }
