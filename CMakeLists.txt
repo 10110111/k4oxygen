@@ -3,6 +3,7 @@ project(k4oxygen)
 
 set(CMAKE_AUTOMOC ON)
 if(NOT DEFINED QT_VERSION)
+    message("** NOTE: QT_VERSION is not defined, using default setup: Qt4. Pass -DQT_VERSION=5 to cmake to\n    choose Qt5 or -DQT_VERSION=4 to get rid of this message and choose Qt4.")
     set(QT_VERSION 4)
 endif()
 if("${QT_VERSION}" STREQUAL 5 OR "${QT_VERSION}" STREQUAL Qt5)
