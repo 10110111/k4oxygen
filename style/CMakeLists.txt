@@ -10,6 +10,7 @@ set(oxygenstyle_LIB_SRCS
 )
 set(oxygen_imported_SRCS
     ../libs/imported/oxygenconfig.cpp
+    ../libs/imported/oxygenoption.cpp
     ../libs/imported/oxygenoptionmap.cpp
     ../libs/imported/oxygennetrootinfo.cpp
     ../libs/imported/kcolorscheme.cpp

@@ -31,10 +31,8 @@
 #include <string>
 #include "oxygen_export.h"
 #include <QtCore/QTextStream>
-
-class QColor;
-class QStringList;
-class QString;
+#include <QColor>
+#include <QStringList>
 
 namespace Oxygen
 {
@@ -126,6 +124,9 @@ namespace Oxygen
         QVariant var(QString(_value.c_str()));
         return !_value.empty() && var.canConvert<T>() ? var.value<T>() : defaultValue;
     }
+    // QColor-QString conversion via QVariant appears to look not how we want it in
+    // KDE settings, so we implement it manually
+    template<> QColor Option::toVariant(QColor defaultValue) const;
 
     //_______________________________________________________________________
     bool Option::Set::operator == (const Option::Set& other ) const
