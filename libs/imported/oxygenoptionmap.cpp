@@ -51,7 +51,7 @@ namespace Oxygen
 
                 size_t end( currentLine.rfind( ']' ) );
                 if( end == std::string::npos ) continue;
-                currentSection = currentLine.substr( 0, end+1 );
+                currentSection = currentLine.substr( 1, end-1 );
 
             } else if( currentSection.empty() ) {
 

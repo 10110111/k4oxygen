@@ -79,7 +79,7 @@ namespace Oxygen
         {
             for( OptionMap::const_iterator iter = options.begin(); iter != options.end(); ++iter )
             {
-                out << iter->first << std::endl;
+                out << '[' << iter->first << ']' << std::endl;
                 out << iter->second << std::endl;
             }
             return out;
