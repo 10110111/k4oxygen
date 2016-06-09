@@ -157,10 +157,6 @@ QPalette KGlobalSettings::createApplicationPalette()
 
 void KGlobalSettings::kdisplaySetPalette()
 {
-#if !defined(Q_WS_MAEMO_5) && !defined(Q_OS_WINCE) && !defined(MEEGO_EDITION_HARMATTAN)
-/*    if (!kdeFullSession) {
-        return;
-    }*/
 #if QT_VERSION >= 0x50000
     if(qobject_cast<QGuiApplication*>(qApp)) {
 #else
@@ -169,18 +165,11 @@ void KGlobalSettings::kdisplaySetPalette()
         QApplication::setPalette( createApplicationPalette() );
     }
     emit kdisplayPaletteChanged();
-//    emit q->appearanceChanged();
-#endif
 }
 
 
 void KGlobalSettings::kdisplaySetFont()
 {
-#if !defined(Q_WS_MAEMO_5) && !defined(Q_OS_WINCE) && !defined(MEEGO_EDITION_HARMATTAN)
-/*    if (!kdeFullSession) {
-        return;
-    }*/
-
 /* // TODO(10110111): make it work
     if (qApp->type() == QApplication::GuiClient) {
         KGlobalSettingsData* data = KGlobalSettingsData::self();
@@ -192,9 +181,6 @@ void KGlobalSettings::kdisplaySetFont()
         QApplication::setFont( menuFont, "KPopupTitle" );
         QApplication::setFont( data->font(KGlobalSettingsData::ToolbarFont), "QToolBar" );
     }*/
-//    emit q->kdisplayFontChanged();
-//    emit q->appearanceChanged();
-#endif
 }
 
 
@@ -296,7 +282,8 @@ void ConfigBase::reparseConfiguration()
     {
         const QString filePath = paths[i]+"/"+fileName;
         merge(OptionMap(filePath.toUtf8().constData()));
-        // TODO: monitor the file for changes (see oxygen-gtk's monitorFile()
+        // FIXME: do we want to monitor the file for changes (see oxygen-gtk's
+        //      monitorFile()), or is it sufficient to rely on DBus events?
     }
 }
 
