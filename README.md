@@ -1,5 +1,5 @@
-# K4Oxygen
-This is a variant of KDE4 Oxygen widget theme, released from KDE dependencies and supported both for Qt4 and Qt5.
+# Introduction
+K4Oxygen is a variant of KDE4 Oxygen widget theme, released from KDE dependencies and supported both for Qt4 and Qt5.
 
 It is based on oxygen-transparent for KDE4 (as of commit [aa154d4](https://github.com/KDE/oxygen-transparent/commit/aa154d4e2f930258a9f094014103078a91003180)), but currently has some **limitations**:
 
