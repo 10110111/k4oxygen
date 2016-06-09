@@ -171,25 +171,10 @@ public:
      * @since 4.6
      */
     enum ActivateOption {
-//        ApplySettings = 0x1, ///< Make all globally applicable settings take effect.
+        ApplySettings = 0x1, ///< Make all globally applicable settings take effect.
         ListenForChanges = 0x2 ///< Listen for changes to the settings.
     };
     Q_DECLARE_FLAGS(ActivateOptions, ActivateOption)
-    /**
-     * Makes all globally applicable settings take effect
-     * and starts listening for changes to these settings.
-     *
-     * This is usually called only by the KApplication constructor.
-     *
-     * @since 4.3.3
-     */
-    void activate(); //KDE5: Merge with the overloaded method below
-
-    /**
-     * @overload
-     *
-     * @since 4.6
-     */
     void activate(ActivateOptions options);
 
     /**

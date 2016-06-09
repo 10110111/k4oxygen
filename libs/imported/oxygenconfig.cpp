@@ -91,6 +91,7 @@ KGlobalSettings* KGlobalSettings::self()
     return self;
 }
 
+// Taken from kglobalsettings.cpp in kdelibs
 void KGlobalSettings::activate(ActivateOptions options)
 {
     if (!activated) {
@@ -101,11 +102,11 @@ void KGlobalSettings::activate(ActivateOptions options)
                                                    "notifyChange", this, SLOT(_k_slotNotifyChange(int,int)) );
         }
 
-//        if (options & ApplySettings) {
-//            d->kdisplaySetStyle(); // implies palette setup
-//            d->kdisplaySetFont();
+        if (options & ApplySettings) {
+            kdisplaySetPalette(); // XXX(10110111): originally: "d->kdisplaySetStyle(); // implies palette setup"
+            kdisplaySetFont();
 //            d->propagateQtSettings();
-//        }
+        }
     }
 }
 
@@ -291,7 +292,9 @@ void ConfigBase::reparseConfiguration()
 
 KSharedConfig::KSharedConfig()
     : ConfigBase("kdeglobals")
-{}
+{
+    KGlobalSettings::self()->activate(KGlobalSettings::ApplySettings);
+}
 
 // -------------------- OxygenConfig impl ---------------------------
 
