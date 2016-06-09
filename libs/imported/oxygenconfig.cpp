@@ -23,6 +23,10 @@
 #include <QProcess>
 #include <QDir>
 #include <QProcessEnvironment>
+#include "kcolorscheme.h"
+#if QT_VERSION >= 0x50000
+#include <QGuiApplication>
+#endif
 
 namespace Oxygen
 {
@@ -105,16 +109,65 @@ void KGlobalSettings::activate(ActivateOptions options)
     }
 }
 
+// Taken from KDE's KGlobalSettings::Private::createNewApplicationPalette() with caching removed
+QPalette KGlobalSettings::createApplicationPalette()
+{
+    KSharedConfigPtr config=KGlobal::config();
+
+    QPalette palette;
+
+    QPalette::ColorGroup states[3] = { QPalette::Active, QPalette::Inactive,
+                                       QPalette::Disabled };
+
+    // TT thinks tooltips shouldn't use active, so we use our active colors for all states
+    KColorScheme schemeTooltip(QPalette::Active, KColorScheme::Tooltip, config);
+
+    for ( int i = 0; i < 3 ; i++ ) {
+        QPalette::ColorGroup state = states[i];
+        KColorScheme schemeView(state, KColorScheme::View, config);
+        KColorScheme schemeWindow(state, KColorScheme::Window, config);
+        KColorScheme schemeButton(state, KColorScheme::Button, config);
+        KColorScheme schemeSelection(state, KColorScheme::Selection, config);
+
+        palette.setBrush( state, QPalette::WindowText, schemeWindow.foreground() );
+        palette.setBrush( state, QPalette::Window, schemeWindow.background() );
+        palette.setBrush( state, QPalette::Base, schemeView.background() );
+        palette.setBrush( state, QPalette::Text, schemeView.foreground() );
+        palette.setBrush( state, QPalette::Button, schemeButton.background() );
+        palette.setBrush( state, QPalette::ButtonText, schemeButton.foreground() );
+        palette.setBrush( state, QPalette::Highlight, schemeSelection.background() );
+        palette.setBrush( state, QPalette::HighlightedText, schemeSelection.foreground() );
+        palette.setBrush( state, QPalette::ToolTipBase, schemeTooltip.background() );
+        palette.setBrush( state, QPalette::ToolTipText, schemeTooltip.foreground() );
+
+        palette.setColor( state, QPalette::Light, schemeWindow.shade( KColorScheme::LightShade ) );
+        palette.setColor( state, QPalette::Midlight, schemeWindow.shade( KColorScheme::MidlightShade ) );
+        palette.setColor( state, QPalette::Mid, schemeWindow.shade( KColorScheme::MidShade ) );
+        palette.setColor( state, QPalette::Dark, schemeWindow.shade( KColorScheme::DarkShade ) );
+        palette.setColor( state, QPalette::Shadow, schemeWindow.shade( KColorScheme::ShadowShade ) );
+
+        palette.setBrush( state, QPalette::AlternateBase, schemeView.background( KColorScheme::AlternateBackground) );
+        palette.setBrush( state, QPalette::Link, schemeView.foreground( KColorScheme::LinkText ) );
+        palette.setBrush( state, QPalette::LinkVisited, schemeView.foreground( KColorScheme::VisitedText ) );
+    }
+
+    return palette;
+
+}
+
 void KGlobalSettings::kdisplaySetPalette()
 {
 #if !defined(Q_WS_MAEMO_5) && !defined(Q_OS_WINCE) && !defined(MEEGO_EDITION_HARMATTAN)
 /*    if (!kdeFullSession) {
         return;
     }*/
-/* // TODO(10110111): make it work
+#if QT_VERSION >= 0x50000
+    if(qobject_cast<QGuiApplication*>(qApp)) {
+#else
     if (qApp->type() == QApplication::GuiClient) {
-        QApplication::setPalette( q->createApplicationPalette() );
-    }*/
+#endif
+        QApplication::setPalette( createApplicationPalette() );
+    }
     emit kdisplayPaletteChanged();
 //    emit q->appearanceChanged();
 #endif

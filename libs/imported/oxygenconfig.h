@@ -161,6 +161,8 @@ public:
      */
     static qreal contrastF(const KSharedConfigPtr &config=KGlobal::config());
 
+    static QPalette createApplicationPalette();
+
     static KGlobalSettings* self();
     KGlobalSettings();
     /**
