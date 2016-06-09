@@ -699,6 +699,7 @@ namespace Oxygen
             case PM_DockWidgetFrameWidth: return DockWidget_FrameWidth;
             case PM_DockWidgetSeparatorExtent: return DockWidget_SeparatorExtend;
             case PM_DockWidgetTitleMargin: return DockWidget_TitleMargin;
+            case PM_DockWidgetTitleBarButtonMargin: return 2;
 
             // progress bar
             case PM_ProgressBarChunkWidth: return 1;
