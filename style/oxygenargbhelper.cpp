@@ -145,7 +145,7 @@ namespace Oxygen
                     widget->inherits( "QSplashScreen") ) break;
 
                 if( widget->windowFlags().testFlag( Qt::FramelessWindowHint ) ) break;
-                if( isXEmbed( widget ) ) break;
+                if( QT_VERSION<0x50000 && isXEmbed( widget ) ) break;
 
                 // setup transparency and return
                 setupTransparency( widget );
@@ -291,8 +291,6 @@ namespace Oxygen
     //______________________________________________________________
     bool ArgbHelper::isXEmbed( QWidget* widget ) const
     {
-        if(QT_VERSION >= 0x50000) return false;
-
         #if HAVE_X11
 
         // QTextStream( stdout ) << "ArgbHelper::isXEmbed" << endl;
