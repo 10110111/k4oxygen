@@ -32,6 +32,11 @@
 #include <QDialog>
 #include <QtGui/QIcon>
 
+#if QT_VERSION >= 0x50000
+#include <QWindow>
+#include <QEvent>
+#endif
+
 #if HAVE_X11
 #include <QX11Info>
 #include <X11/Xlib.h>
@@ -140,7 +145,7 @@ namespace Oxygen
                     widget->inherits( "QSplashScreen") ) break;
 
                 if( widget->windowFlags().testFlag( Qt::FramelessWindowHint ) ) break;
-                if( isXEmbed( widget ) ) break;
+                if( QT_VERSION<0x50000 && isXEmbed( widget ) ) break;
 
                 // setup transparency and return
                 setupTransparency( widget );
@@ -199,6 +204,21 @@ namespace Oxygen
 
     }
 
+#if QT_VERSION >= 0x50000
+    struct Hack : QWindow
+    {
+        static void recreateWindow(QWidget* widget)
+        {
+            QWindow* w=widget->windowHandle();
+            w->destroy();
+            w->create();
+            // Force Qt to update winId
+            QEvent e(QEvent::ScreenChangeInternal);
+            QApplication::sendEvent(widget,&e);
+        }
+    };
+#endif
+
     //______________________________________________________________
     void ArgbHelper::setupTransparency( QWidget* widget )
     {
@@ -230,6 +250,11 @@ namespace Oxygen
 
         // set translucent flag
         widget->setAttribute( Qt::WA_TranslucentBackground );
+        #if QT_VERSION >= 0x50000
+        // Apply the flag
+        if(widget->windowHandle())
+            Hack::recreateWindow(widget);
+        #endif
 
         /*
         reset WA_Moved flag, which is incorrectly set to true when
@@ -266,7 +291,6 @@ namespace Oxygen
     //______________________________________________________________
     bool ArgbHelper::isXEmbed( QWidget* widget ) const
     {
-
         #if HAVE_X11
 
         // QTextStream( stdout ) << "ArgbHelper::isXEmbed" << endl;
