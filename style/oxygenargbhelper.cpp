@@ -32,8 +32,10 @@
 #include <QDialog>
 #include <QtGui/QIcon>
 
+#if QT_VERSION >= 0x50000
 #include <QWindow>
 #include <QEvent>
+#endif
 
 #if HAVE_X11
 #include <QX11Info>
@@ -202,6 +204,7 @@ namespace Oxygen
 
     }
 
+#if QT_VERSION >= 0x50000
     struct Hack : QWindow
     {
         static void recreateWindow(QWidget* widget)
@@ -214,6 +217,7 @@ namespace Oxygen
             QApplication::sendEvent(widget,&e);
         }
     };
+#endif
 
     //______________________________________________________________
     void ArgbHelper::setupTransparency( QWidget* widget )
@@ -246,9 +250,11 @@ namespace Oxygen
 
         // set translucent flag
         widget->setAttribute( Qt::WA_TranslucentBackground );
+        #if QT_VERSION >= 0x50000
         // Apply the flag
         if(widget->windowHandle())
             Hack::recreateWindow(widget);
+        #endif
 
         /*
         reset WA_Moved flag, which is incorrectly set to true when
