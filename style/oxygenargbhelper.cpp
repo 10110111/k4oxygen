@@ -31,7 +31,9 @@
 
 #include <QDialog>
 #include <QtGui/QIcon>
+
 #include <QWindow>
+#include <QEvent>
 
 #if HAVE_X11
 #include <QX11Info>
@@ -202,10 +204,14 @@ namespace Oxygen
 
     struct Hack : QWindow
     {
-        static void recreateWindow(QWindow* w)
+        static void recreateWindow(QWidget* widget)
         {
+            QWindow* w=widget->windowHandle();
             w->destroy();
             w->create();
+            // Force Qt to update winId
+            QEvent e(QEvent::ScreenChangeInternal);
+            QApplication::sendEvent(widget,&e);
         }
     };
 
@@ -242,7 +248,7 @@ namespace Oxygen
         widget->setAttribute( Qt::WA_TranslucentBackground );
         // Apply the flag
         if(widget->windowHandle())
-            Hack::recreateWindow(widget->windowHandle());
+            Hack::recreateWindow(widget);
 
         /*
         reset WA_Moved flag, which is incorrectly set to true when
