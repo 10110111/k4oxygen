@@ -33,7 +33,7 @@ namespace Oxygen
 
 QString userConfigDir()
 {
-    // Theres' no better way in Qt4. Although Qt5 has QStandardPaths, we'll do in one way for both Qt4 and Qt5.
+    // There's no better way in Qt4. Although Qt5 has QStandardPaths, we'll do in one way for both Qt4 and Qt5.
     return QProcessEnvironment::systemEnvironment().value("XDG_CONFIG_HOME",QDir::homePath()+"/.config");
 }
 
