@@ -202,7 +202,11 @@ namespace Oxygen
 
     struct Hack : QWindow
     {
-        void doRecreate() { destroy(); create(); }
+        static void recreateWindow(QWindow* w)
+        {
+            w->destroy();
+            w->create();
+        }
     };
 
     //______________________________________________________________
@@ -238,7 +242,7 @@ namespace Oxygen
         widget->setAttribute( Qt::WA_TranslucentBackground );
         // Apply the flag
         if(widget->windowHandle())
-            static_cast<Hack*>(widget->windowHandle())->doRecreate();
+            Hack::recreateWindow(widget->windowHandle());
 
         /*
         reset WA_Moved flag, which is incorrectly set to true when
