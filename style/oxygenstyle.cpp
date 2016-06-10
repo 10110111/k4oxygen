@@ -8340,17 +8340,6 @@ namespace Oxygen
     //_____________________________________________________________
     void Style::initializeKGlobalSettings( void )
     {
-
-        if( qApp && !qApp->inherits( "KApplication" ) )
-        {
-            /*
-            for Qt, non-KDE applications, needs to explicitly activate KGlobalSettings.
-            On the other hand, it is done internally in kApplication constructor,
-            so no need to duplicate here.
-            */
-            KGlobalSettings::self()->activate( KGlobalSettings::ListenForChanges );
-        }
-
         // connect palette changes to local slot, to make sure caches are cleared
         connect( KGlobalSettings::self(), SIGNAL(kdisplayPaletteChanged()), this, SLOT(globalPaletteChanged()) );
 

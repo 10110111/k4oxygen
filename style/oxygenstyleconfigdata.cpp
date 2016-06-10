@@ -24,6 +24,7 @@ namespace Oxygen
 void StyleConfigData::readConfig()
 {
     OxygenConfig* const config=OxygenConfig::self();
+    config->reparseConfiguration();
 
     const char* group="Common";
 

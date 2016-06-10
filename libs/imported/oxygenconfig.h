@@ -72,7 +72,7 @@ protected:
     QString fileName;
     ConfigBase(const char* fileName);
 public:
-    void reparseConfiguration();
+    virtual void reparseConfiguration();
     KConfigGroup group(std::string const& groupName) const
     { return KConfigGroup(this, groupName); }
 };
@@ -81,6 +81,7 @@ class KDE_EXPORT KSharedConfig : public ConfigBase
 {
 public:
     KSharedConfig();
+    virtual void reparseConfiguration();
 };
 
 template<typename T>

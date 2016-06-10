@@ -272,7 +272,6 @@ void KGlobalSettings::_k_slotNotifyChange(int changeType, int arg)
 ConfigBase::ConfigBase(const char* fileName)
     : fileName(fileName)
 {
-    reparseConfiguration();
 }
 
 void ConfigBase::reparseConfiguration()
@@ -292,8 +291,13 @@ void ConfigBase::reparseConfiguration()
 
 KSharedConfig::KSharedConfig()
     : ConfigBase("kdeglobals")
+{}
+
+void KSharedConfig::reparseConfiguration()
 {
-    KGlobalSettings::self()->activate(KGlobalSettings::ApplySettings);
+    ConfigBase::reparseConfiguration();
+    KGlobalSettings::self()->activate(static_cast<KGlobalSettings::ActivateOptions>
+            (KGlobalSettings::ApplySettings|KGlobalSettings::ListenForChanges));
 }
 
 // -------------------- OxygenConfig impl ---------------------------
