@@ -291,7 +291,7 @@ namespace Oxygen
     //______________________________________________________________
     bool ArgbHelper::isXEmbed( QWidget* widget ) const
     {
-        return false;
+        if(QT_VERSION >= 0x50000) return false;
 
         #if HAVE_X11
 
