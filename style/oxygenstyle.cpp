@@ -7926,14 +7926,14 @@ namespace Oxygen
         // reset helper configuration
         helper().reloadConfig();
 
+        // reset config
+        StyleConfigData::self()->readConfig();
+
         // background gradient
         helper().setUseBackgroundGradient( StyleConfigData::useBackgroundGradient() );
 
         // background pixmap
         helper().setBackgroundPixmap( StyleConfigData::backgroundPixmap() );
-
-        // reset config
-        StyleConfigData::self()->readConfig();
 
         // update caches size
         int cacheSize( StyleConfigData::cacheEnabled() ?
