@@ -5,7 +5,7 @@ It is based on oxygen-transparent for KDE4 (as of commit [aa154d4](https://githu
 
 * no window decorations implementation (it'd depend on KDE anyway, and the code would likely be different for KDE4 and KF5)
 * no configuration utility
-* transparency is broken on Qt5
+* translucency in Qt5 version is in experimental stage
 
 The theme does read Oxygen and global KDE settings similarly to how oxygen-gtk does it.
 
