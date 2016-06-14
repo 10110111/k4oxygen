@@ -21,6 +21,11 @@ You can install it using the following commands
 Similarly, for Qt4 version replace `-DQT_VERSION=5` with `-DQT_VERSION=4`.
 
 # Configuration
+## Making K4Oxygen current Qt theme
+* Qt4: You can choose current theme using `qtconfig` (or, on some distros, `qtconfig-qt4`)
+* Qt5: Qt5 doesn't provide a standard utility to set its theme, but you can either try `qt5ct` utility, or set a global environment variable `QT_STYLE_OVERRIDE` to `k4oxygen`.
+
+## Style settings
 In a KDE session K4Oxygen should pick the Oxygen and global KDE settings automatically with no user intervention.
 
 In a non-KDE session you can set non-default settings by editing `oxygenrc` and `kdeglobals` files. These files are searched as follows:
