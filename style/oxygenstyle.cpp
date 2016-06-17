@@ -7958,20 +7958,16 @@ namespace Oxygen
         bool opacityChanged( argbHelper().setOpacity( StyleConfigData::backgroundOpacity() ) );
         argbHelper().setBlackList( StyleConfigData::opacityBlackList() );
 
+        // always enable blur helper
+        blurHelper().setEnabled( true );
         /*
         disable stackedWidget engine in case
         translucent backgrounds are enabled
         */
         if( argbHelper().enabled() )
         {
-
-            blurHelper().setEnabled( true );
             transitions().stackedWidgetEngine().setEnabled( false );
             transitions().labelEngine().setEnabled( false );
-
-        } else {
-
-            blurHelper().setEnabled( false );
 
         }
 
