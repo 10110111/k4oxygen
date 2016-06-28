@@ -23,6 +23,7 @@
 #include <QProcess>
 #include <QDir>
 #include <QProcessEnvironment>
+#include <QFont>
 #include "kcolorscheme.h"
 #if QT_VERSION >= 0x50000
 #include <QGuiApplication>
@@ -171,17 +172,25 @@ void KGlobalSettings::kdisplaySetPalette()
 
 void KGlobalSettings::kdisplaySetFont()
 {
-/* // TODO(10110111): make it work
+#if QT_VERSION >= 0x50000
+    if(qobject_cast<QGuiApplication*>(qApp)) {
+#else
     if (qApp->type() == QApplication::GuiClient) {
-        KGlobalSettingsData* data = KGlobalSettingsData::self();
+#endif
+        KConfigGroup g(KGlobal::config(), "General");
 
-        QApplication::setFont( data->font(KGlobalSettingsData::GeneralFont) );
-        const QFont menuFont = data->font( KGlobalSettingsData::MenuFont );
+        const QFont generalFont=g.readEntry("font",QApplication::font());
+        QApplication::setFont( generalFont );
+
+        // FIXME: why doesn't this apply?
+        const QFont menuFont = g.readEntry("menuFont",generalFont);
         QApplication::setFont( menuFont, "QMenuBar" );
         QApplication::setFont( menuFont, "QMenu" );
         QApplication::setFont( menuFont, "KPopupTitle" );
-        QApplication::setFont( data->font(KGlobalSettingsData::ToolbarFont), "QToolBar" );
-    }*/
+
+        QApplication::setFont( g.readEntry("toolbarFont",generalFont), "QToolBar" );
+        // TODO: set fonts: {"fixed","smallestReadableFont"}
+    }
 }
 
 
@@ -207,15 +216,13 @@ void KGlobalSettings::_k_slotNotifyChange(int changeType, int arg)
             kdisplaySetPalette();
         }
         break;
-/* // TODO(10110111): make this work
     case FontChanged:
         KGlobal::config()->reparseConfiguration();
-        KGlobalSettingsData::self()->dropFontSettingsCache();
+//        KGlobalSettingsData::self()->dropFontSettingsCache();
         if (activated) {
             kdisplaySetFont();
         }
         break;
-*/
     case SettingsChanged: {
         KGlobal::config()->reparseConfiguration();
 /*        SettingsCategory category = static_cast<SettingsCategory>(arg);
