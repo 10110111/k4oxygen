@@ -40,8 +40,8 @@ If you've edited `oxygenrc` or `kdeglobals`, you can force configuration reloadi
 
 Here `TypeOfChange` for `kdeglobals` is one of the following (the ones supported):
 
-* PaletteChanged = 0
-* FontChanged = 1
-* SettingsChanged = 3
+* 0 — means Palette Changed
+* 1 — means Font Changed
+* 3 — means Settings Changed
 
 These commands simulate the signals sent by KDE's *System Settings* utility.
