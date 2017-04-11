@@ -33,9 +33,15 @@ In a non-KDE session you can set non-default settings by editing `oxygenrc` and 
 1. If `kde4-config --path config` works, its output paths are used
 2. Otherwise, the path is set to `$HOME/.config/k4oxygen` (or `$XDG_CONFIG_HOME/k4oxygen`, if `XDG_CONFIG_HOME` is set).
 
-If you've edited `oxygenrc` or `kdeglobals`, you can force configuration reloading using these commands:
+If you've edited `oxygenrc` or `kdeglobals`, you can force configuration reloading using these commands (`TypeOfChange` is a parameter):
 
-    dbus-send --type=signal /KGlobalSettings org.kde.KGlobalSettings.notifyChange  # for kdeglobals
+    dbus-send --type=signal /KGlobalSettings org.kde.KGlobalSettings.notifyChange int32:TypeOfChange int32:0  # for kdeglobals
     dbus-send --type=signal /OxygenStyle org.kde.Oxygen.Style.reparseConfiguration # for oxygenrc
+
+Here `TypeOfChange` for `kdeglobals` is one of the following (the ones supported):
+
+* PaletteChanged = 0
+* FontChanged = 1
+* SettingsChanged = 3
 
 These commands simulate the signals sent by KDE's *System Settings* utility.
