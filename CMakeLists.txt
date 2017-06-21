@@ -8,6 +8,7 @@ if(NOT DEFINED QT_VERSION)
 endif()
 if("${QT_VERSION}" STREQUAL 5 OR "${QT_VERSION}" STREQUAL Qt5)
     message("++ Compiling style for Qt 5")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
     find_package(Qt5 5.5 REQUIRED Core DBus Gui Widgets COMPONENTS X11Extras)
     set(QT_LIBRARIES Qt5::Core Qt5::DBus Qt5::Gui Qt5::Widgets Qt5::X11Extras)
     # Re-enable deprecated QWeakPointer<QObject*>
