@@ -24,6 +24,7 @@
 #include <QDir>
 #include <QProcessEnvironment>
 #include <QFont>
+#include <QIcon>
 #include "kcolorscheme.h"
 #if QT_VERSION >= 0x50000
 #include <QGuiApplication>
@@ -92,6 +93,11 @@ KGlobalSettings* KGlobalSettings::self()
     return self;
 }
 
+void applyIconTheme()
+{
+    KConfigGroup g(KGlobal::config(), "Icons");
+    QIcon::setThemeName(g.readEntry("Theme",QIcon::themeName()));
+}
 // Taken from kglobalsettings.cpp in kdelibs
 void KGlobalSettings::activate(ActivateOptions options)
 {
@@ -107,6 +113,8 @@ void KGlobalSettings::activate(ActivateOptions options)
             kdisplaySetPalette(); // XXX(10110111): originally: "d->kdisplaySetStyle(); // implies palette setup"
             kdisplaySetFont();
 //            d->propagateQtSettings();
+
+            applyIconTheme(); // FIXME(10110111): where should this addition really go?
         }
     }
 }
@@ -248,13 +256,12 @@ void KGlobalSettings::_k_slotNotifyChange(int changeType, int arg)
         }*/
         break;
     }
-/* // FIXME(10110111): do we want to implement this?
     case IconChanged:
-        QPixmapCache::clear();
+//        QPixmapCache::clear();
         KGlobal::config()->reparseConfiguration();
-        emit q->iconChanged(arg);
+        applyIconTheme(); // 10110111
+//        emit q->iconChanged(arg);
         break;
-*/
 
 /*    case CursorChanged:
         applyCursorTheme();
