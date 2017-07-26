@@ -8037,10 +8037,16 @@ namespace Oxygen
         const QStyleOption *option,
         const QWidget *widget ) const
     {
+        struct KIcon_
+        {
+            QIcon operator()(const char* name)
+            {
+                return QIcon::fromTheme(QLatin1String(name));
+            }
+        } KIcon;
         switch( standardIcon )
         {
-        // FIXME(10110111): stubbing this out until KIcon or something instead is implemented
-/*
+
             // copied from kstyle
             case SP_DesktopIcon: return KIcon( "user-desktop" );
             case SP_TrashIcon: return KIcon( "user-trash" );
@@ -8109,76 +8115,6 @@ namespace Oxygen
             case SP_MediaSeekBackward: return KIcon( "media-seek-backward" );
             case SP_MediaVolume: return KIcon( "audio-volume-medium" );
             case SP_MediaVolumeMuted: return KIcon( "audio-volume-muted" );
-*/
-            case SP_DesktopIcon:
-            case SP_TrashIcon:
-            case SP_ComputerIcon:
-            case SP_DriveFDIcon:
-            case SP_DriveHDIcon:
-            case SP_DriveCDIcon:
-            case SP_DriveDVDIcon:
-            case SP_DriveNetIcon:
-            case SP_DirHomeIcon:
-            case SP_DirOpenIcon:
-            case SP_DirClosedIcon:
-            case SP_DirIcon:
-
-            //TODO: generate ( !? ) folder with link emblem
-            case SP_DirLinkIcon:
-
-            //TODO: look for a better icon
-            case SP_FileIcon:
-
-            //TODO: generate ( !? ) file with link emblem
-            case SP_FileLinkIcon:
-
-            //TODO: find correct icon
-            case SP_FileDialogStart:
-
-            //TODO: find correct icon
-            case SP_FileDialogEnd:
-
-            case SP_FileDialogToParent:
-            case SP_FileDialogNewFolder:
-            case SP_FileDialogDetailedView:
-            case SP_FileDialogInfoView:
-            case SP_FileDialogContentsView:
-            case SP_FileDialogListView:
-            case SP_FileDialogBack:
-            case SP_MessageBoxInformation:
-            case SP_MessageBoxWarning:
-            case SP_MessageBoxCritical:
-            case SP_MessageBoxQuestion:
-            case SP_DialogOkButton:
-            case SP_DialogCancelButton:
-            case SP_DialogHelpButton:
-            case SP_DialogOpenButton:
-            case SP_DialogSaveButton:
-            case SP_DialogCloseButton:
-            case SP_DialogApplyButton:
-            case SP_DialogResetButton:
-            case SP_DialogDiscardButton:
-            case SP_DialogYesButton:
-            case SP_DialogNoButton:
-            case SP_ArrowUp:
-            case SP_ArrowDown:
-            case SP_ArrowLeft:
-            case SP_ArrowRight:
-            case SP_ArrowBack:
-            case SP_ArrowForward:
-            case SP_BrowserReload:
-            case SP_BrowserStop:
-            case SP_MediaPlay:
-            case SP_MediaStop:
-            case SP_MediaPause:
-            case SP_MediaSkipForward:
-            case SP_MediaSkipBackward:
-            case SP_MediaSeekForward:
-            case SP_MediaSeekBackward:
-            case SP_MediaVolume:
-            case SP_MediaVolumeMuted:
-            return QCommonStyle::STANDARD_ICON_IMPLEMENTATION( standardIcon, option, widget );
-// 10110111: End stub
             default: break;
 
         }
