@@ -205,7 +205,7 @@ namespace Oxygen
     }
 
 #if QT_VERSION >= 0x50000
-    struct Hack : QWindow
+    struct Hack
     {
         static void recreateWindow(QWidget* widget)
         {
