@@ -364,7 +364,10 @@ namespace Oxygen
         From bespin code. Supposibly prevent playing with some 'pseudo-widgets'
         that have winId matching some other -random- window
         */
-        if( !(widget->testAttribute(Qt::WA_WState_Created) || widget->internalWinId() ))
+        /* edited by 10110111 to match QWidget::winId()'s logic for
+           determination whether it needs to create a new window Id, as well as
+           the opposite condition in ArgbHelper::setupTransparency() */
+        if( !widget->testAttribute(Qt::WA_WState_Created) || !widget->internalWinId() )
         { return false; }
 
         // create pixmap handles if needed
