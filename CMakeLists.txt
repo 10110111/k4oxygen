@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(k4oxygen)
+project(k4oxygen CXX)
 
 set(CMAKE_AUTOMOC ON)
 if(NOT DEFINED QT_VERSION)
