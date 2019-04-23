@@ -1107,7 +1107,7 @@ namespace Oxygen
             &data);
 
         // finish if no data is found
-        if( data == None || n != 1 ) return false;
+        if( !data || n != 1 ) return false;
         else return *data;
 
     }
