@@ -25,7 +25,7 @@
 #include <QColor>
 #include <QImage>
 
-#include <math.h>
+#include <cmath>
 
 // BEGIN internal helper functions
 static inline qreal mixQreal(qreal a, qreal b, qreal bias)
@@ -88,7 +88,7 @@ QColor KColorUtils::tint(const QColor &base, const QColor &color, qreal amount)
 {
     if (amount <= 0.0) return base;
     if (amount >= 1.0) return color;
-    if (isnan(amount)) return base;
+    if (std::isnan(amount)) return base;
 
     qreal baseLuma = luma(base); //cache value because luma call is expensive
     double ri = contrastRatioForLuma(baseLuma, luma(color));
@@ -111,7 +111,7 @@ QColor KColorUtils::mix(const QColor &c1, const QColor &c2, qreal bias)
 {
     if (bias <= 0.0) return c1;
     if (bias >= 1.0) return c2;
-    if (isnan(bias)) return c1;
+    if (std::isnan(bias)) return c1;
 
     qreal r = mixQreal(c1.redF(),   c2.redF(),   bias);
     qreal g = mixQreal(c1.greenF(), c2.greenF(), bias);
