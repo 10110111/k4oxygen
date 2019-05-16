@@ -145,10 +145,10 @@ namespace Oxygen
         const QRect r = window->rect();
         int height( window->frameGeometry().height() );
         int width( window->frameGeometry().width() );
-        // This can happen in Qt5 for some reason... Use a sane fallback then. It'll be not the most
-        // accurate, but at least not so ugly as it would be with zero width or height.
-        if(!height) height=window->height();
-        if(!width) width=window->width();
+        // Width or height can happen to be <=1 in Qt5 for some reason... Use a sane fallback then. It'll
+        // be not the most accurate, but at least not so ugly as it would be otherwise.
+        if(height<2) height=window->height();
+        if(width<2) width=window->width();
 
         if( yShift > 0 )
         {
