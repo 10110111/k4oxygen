@@ -42,8 +42,11 @@ QString userConfigDir()
 QStringList getConfigPaths()
 {
     QProcess process;
-    QStringList args; args << "--path" << "config";
+    QStringList args{"--path","config"};
     process.start("kde4-config",args);
+    if(process.waitForFinished() && process.exitCode()==0)
+        return QString::fromUtf8(process.readAllStandardOutput()).trimmed().split(':');
+    process.start("kf5-config",args);
     if(process.waitForFinished() && process.exitCode()==0)
         return QString::fromUtf8(process.readAllStandardOutput()).trimmed().split(':');
 
