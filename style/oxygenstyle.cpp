@@ -65,6 +65,7 @@
 #include <QAbstractButton>
 #include <QAbstractItemView>
 #include <QApplication>
+#include <QPainterPath>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDial>
