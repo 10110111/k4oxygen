@@ -30,8 +30,10 @@
 
 #include <math.h>
 
+#if HAVE_X11
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#endif
 
 namespace Oxygen
 {
@@ -40,7 +42,7 @@ namespace Oxygen
     StyleHelper::StyleHelper():
         _useBackgroundGradient( true )
     {
-
+#if HAVE_X11
         // get display
         Display *display = QX11Info::display();
 
@@ -48,6 +50,7 @@ namespace Oxygen
         QByteArray buffer;
         QTextStream( &buffer ) << "_NET_WM_CM_S" << DefaultScreen( display );
         _compositingManagerAtom = XInternAtom( display, buffer.constData(), False);
+#endif
     }
 
     //______________________________________________________________________________
@@ -674,8 +677,12 @@ namespace Oxygen
     //________________________________________________________________________________________________________
     bool StyleHelper::compositingActive( void ) const
     {
+#if HAVE_X11
         // direct call to X
         return XGetSelectionOwner( QX11Info::display(), _compositingManagerAtom ) != None;
+#else
+        return false;
+#endif
     }
 
     //________________________________________________________________________________________________________

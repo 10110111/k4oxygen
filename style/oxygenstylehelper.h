@@ -25,8 +25,10 @@
 #include "oxygenhelper.h"
 #include "oxygenanimationmodes.h"
 
+#if HAVE_X11
 #include <QX11Info>
 #include <X11/Xdefs.h>
+#endif
 
 //! helper class
 /*! contains utility functions used at multiple places in oxygen style */
@@ -237,8 +239,10 @@ namespace Oxygen
         TileSetCache _selectionCache;
         TileSetCache _progressBarCache;
 
+#if HAVE_X11
         //! background gradient hint atom
         Atom _compositingManagerAtom;
+#endif
     };
 
     //____________________________________________________________________
@@ -267,10 +271,13 @@ namespace Oxygen
         #else
             // This does work reliably in Qt4, unlike the version for Qt5
             if( widget ) return widget->x11Info().depth() == 32;
+        # if HAVE_X11
             else return QX11Info().appDepth() == 32;
+        # endif
         #endif
 
-        } else return false;
+        }
+        return false;
     }
 
 }
