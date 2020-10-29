@@ -17,7 +17,7 @@ if("${QT_VERSION}" STREQUAL 5 OR "${QT_VERSION}" STREQUAL Qt5)
         set(X11_FOUND TRUE)
     else()
         if(UNIX AND NOT APPLE)
-            message(WARNING "QtX11Extras package wasn't found. Shadows and smooth corners of menus and tooltips won't be supported.")
+            message(WARNING "QtX11Extras package wasn't found. Shadows and smooth corners of menus and tooltips, as well as dragging by empty areas, won't be supported.")
         endif()
     endif()
     # Re-enable deprecated QWeakPointer<QObject*>

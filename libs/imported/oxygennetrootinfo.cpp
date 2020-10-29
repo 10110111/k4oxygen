@@ -17,6 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#if HAVE_X11
+
 #include "oxygennetrootinfo.h"
 #include <cassert>
 
@@ -67,3 +69,5 @@ NETRootInfo::NETRootInfo(Display* display, unsigned long prop, int screen)
 }
 
 }
+
+#endif // HAVE_X11

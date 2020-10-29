@@ -20,6 +20,7 @@
 #ifndef OXYGEN_NETWM_20160605
 #define OXYGEN_NETWM_20160605
 
+#if HAVE_X11
 #include <X11/Xlib.h>
 #include "oxygenmacros.h"
 
@@ -78,5 +79,7 @@ public:
 };
 
 }
+
+#endif // HAVE_X11
 
 #endif
