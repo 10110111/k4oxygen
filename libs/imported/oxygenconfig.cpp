@@ -18,6 +18,7 @@
  */
 
 #include "oxygenconfig.h"
+#include <stdio.h>
 #include <QApplication>
 #include <QtDBus/QtDBus>
 #include <QProcess>
@@ -41,6 +42,20 @@ QString userConfigDir()
 
 QStringList getConfigPaths()
 {
+#ifdef Q_OS_UNIX
+    // Try to avoid QProcess, since it relies too much on signals, and this breaks on e.g. VLC
+    if(const auto p=popen("kde4-config --path config 2>/dev/null || kf5-config --path config 2>/dev/null", "r"))
+    {
+        char buf[1024];
+        std::string data;
+        while(fgets(buf, sizeof buf, p))
+            data+=buf;
+        pclose(p);
+        if(!data.empty())
+            return QString::fromUtf8(data.c_str()).trimmed().split(':');
+    }
+#endif
+
     QProcess process;
     QStringList args{"--path","config"};
     process.start("kde4-config",args);
