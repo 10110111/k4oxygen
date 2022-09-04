@@ -121,6 +121,10 @@ static inline Qt::Orientation orientation(const QStyleOptionProgressBarV2* opt)
 }
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5,11,0)
+# define horizontalAdvance width
+#endif
+
 //_____________________________________________
 // style plugin
 namespace Oxygen
@@ -4308,7 +4312,7 @@ namespace Oxygen
 
         }
 
-        int tw = dwOpt->fontMetrics.width( tmpTitle );
+        int tw = dwOpt->fontMetrics.horizontalAdvance( tmpTitle );
         int width = verticalTitleBar ? r.height() : r.width();
         if( width < tw ) title = dwOpt->fontMetrics.elidedText( title, Qt::ElideRight, width, Qt::TextShowMnemonic );
 
