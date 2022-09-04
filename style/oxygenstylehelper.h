@@ -141,7 +141,7 @@ namespace Oxygen
 
         //! generic hole
         void renderHole( QPainter *p, const QColor& color, const QRect &r,
-            HoleOptions options = 0,
+            HoleOptions options = {},
             TileSet::Tiles tiles = TileSet::Ring )
         { renderHole( p, color, r, options, -1, Oxygen::AnimationNone, tiles ); }
 
@@ -197,11 +197,11 @@ namespace Oxygen
         //@{
 
         //! holes
-        TileSet *hole( const QColor& color, int size = 7, HoleOptions options = 0 )
+        TileSet *hole( const QColor& color, int size = 7, HoleOptions options = {} )
         { return hole( color, QColor(), size, options ); }
 
         //! holes
-        TileSet *hole( const QColor&, const QColor& glow, int size = 7, HoleOptions = 0 );
+        TileSet *hole( const QColor&, const QColor& glow, int size = 7, HoleOptions = {} );
 
         //@}
 

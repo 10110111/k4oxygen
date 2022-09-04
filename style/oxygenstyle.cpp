@@ -2454,7 +2454,7 @@ namespace Oxygen
 
             } else {
 
-                HoleOptions options( 0 );
+                HoleOptions options;
                 if( focusHighlight ) options |= HoleFocus;
                 if( hoverHighlight ) options |= HoleHover;
 
@@ -2995,7 +2995,7 @@ namespace Oxygen
         const bool hasFocus( enabled && ( flags & State_HasFocus ) );
         const QPalette& palette( option->palette );
 
-        StyleOptions opts = 0;
+        StyleOptions opts;
         if( flags & ( State_On|State_Sunken ) ) opts |= Sunken;
         if( flags & State_HasFocus ) opts |= Focus;
         if( enabled && ( flags & State_MouseOver ) ) opts |= Hover;
@@ -3047,7 +3047,7 @@ namespace Oxygen
 
                 slitRect.adjust( 0, 0, 0, -1 );
 
-                HoleOptions options( 0 );
+                HoleOptions options;
                 if( mouseOver ) options |= HoleHover;
 
                 // flat pressed-down buttons do not get focus effect,
@@ -3204,7 +3204,7 @@ namespace Oxygen
         if( widget && !autoRaised )
         {
 
-            StyleOptions opts = 0;
+            StyleOptions opts;
             slitRect.adjust( -1, 0, 1, 0 );
 
             // "normal" parent, and non "autoraised" ( that is: always raised ) buttons
@@ -3760,7 +3760,7 @@ namespace Oxygen
         const QColor highlight( helper().viewHoverBrush().brush( palette ).color() );
         QColor color = palette.color( autoRaise ? QPalette::WindowText:QPalette::ButtonText );
         QColor background = palette.color( QPalette::Window );
-        StyleOptions opts = 0;
+        StyleOptions opts;
 
         // define gradient and polygon for drawing arrow
         QPolygonF a = genericArrow( ArrowDown, ArrowNormal );
@@ -3919,7 +3919,7 @@ namespace Oxygen
         const bool mouseOver( enabled && ( flags & State_MouseOver ) );
         const bool hasFocus( flags & State_HasFocus );
 
-        StyleOptions opts( 0 );
+        StyleOptions opts;
         if( !enabled ) opts |= Disabled;
         if( mouseOver ) opts |= Hover;
         if( hasFocus ) opts |= Focus;
@@ -3969,7 +3969,7 @@ namespace Oxygen
         const bool mouseOver( enabled && ( flags & State_MouseOver ) );
         const bool hasFocus( flags & State_HasFocus );
 
-        StyleOptions opts( 0 );
+        StyleOptions opts;
         if( !enabled ) opts |= Disabled;
         if( mouseOver ) opts |= Hover;
         if( hasFocus ) opts |= Focus;
@@ -4621,7 +4621,7 @@ namespace Oxygen
         if( menuItemOption->checkType == QStyleOptionMenuItem::NonExclusive )
         {
 
-            StyleOptions opts( 0 );
+            StyleOptions opts;
             opts |= Sunken;
             if( !enabled ) opts |= Disabled;
             if( mouseOver ) opts |= Hover;
@@ -4634,7 +4634,7 @@ namespace Oxygen
 
         } else if( menuItemOption->checkType == QStyleOptionMenuItem::Exclusive ) {
 
-            StyleOptions opts( 0 );
+            StyleOptions opts;
             if( !enabled ) opts |= Disabled;
             if( mouseOver ) opts |= Hover;
             if( hasFocus ) opts |= Focus;
@@ -7300,7 +7300,7 @@ namespace Oxygen
 
 
             // style options
-            StyleOptions opts = 0;
+            StyleOptions opts;
             if( mouseOver ) opts |= Hover;
             if( hasFocus ) opts |= Focus;
             if( ( flags & ( State_Sunken|State_On ) ) && !editable ) opts |= Sunken;
@@ -7336,7 +7336,7 @@ namespace Oxygen
                     helper().fillHole( *painter, r.adjusted( 0, -1, 0, 0 ) );
                     painter->restore();
 
-                    HoleOptions options( 0 );
+                    HoleOptions options;
                     if( hasFocus && enabled ) options |= HoleFocus;
                     if( mouseOver && enabled ) options |= HoleHover;
 
@@ -7539,7 +7539,7 @@ namespace Oxygen
         const bool hasFocus( enabled && ( flags & State_HasFocus ) );
         const bool sunken( flags & ( State_On|State_Sunken ) );
 
-        StyleOptions opts = 0;
+        StyleOptions opts;
         if( sunken ) opts |= Sunken;
         if( hasFocus ) opts |= Focus;
         if( mouseOver ) opts |= Hover;
@@ -7649,7 +7649,7 @@ namespace Oxygen
             r = centerRect( r, 21, 21 );
 
             const bool handleActive( sliderOption->activeSubControls & SC_SliderHandle );
-            StyleOptions opts( 0 );
+            StyleOptions opts;
             if( hasFocus ) opts |= Focus;
             if( handleActive && mouseOver ) opts |= Hover;
 
@@ -7704,7 +7704,7 @@ namespace Oxygen
                 helper().fillHole( *painter, r.adjusted( 0, -1, 0, 0 ) );
                 painter->restore();
 
-                HoleOptions options( 0 );
+                HoleOptions options;
                 if( hasFocus && enabled ) options |= HoleFocus;
                 if( mouseOver && enabled ) options |= HoleHover;
 
