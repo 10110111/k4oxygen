@@ -2467,7 +2467,7 @@ namespace Oxygen
         } else if( flags & State_Raised ) {
 
             const QRect local( r.adjusted( -1, -1, 1, 1 ) );
-            renderSlab( painter, local, palette.color( QPalette::Background ), NoFill );
+            renderSlab( painter, local, palette.color( QPalette::Window ), NoFill );
 
         }
 
@@ -3715,7 +3715,7 @@ namespace Oxygen
         // tree branches
         if( !StyleConfigData::viewDrawTreeBranchLines() ) return true;
 
-        painter->setPen( KColorUtils::mix( palette.color( QPalette::Text ), palette.color( QPalette::Background ), 0.8 ) );
+        painter->setPen( KColorUtils::mix( palette.color( QPalette::Text ), palette.color( QPalette::Window ), 0.8 ) );
         if ( flags & ( State_Item | State_Children | State_Sibling ) )
         {
             const QLine line( QPoint( centerX, r.top() ), QPoint( centerX, centerY - expanderAdjust ) );
@@ -4099,8 +4099,8 @@ namespace Oxygen
             const int center( r.left()+r.width()/2 );
             for( int j = r.top()+2; j <= r.bottom()-3; j+=3, ++counter )
             {
-                if( counter%2 == 0 ) helper().renderDot( painter, QPoint( center+1, j ), palette.color( QPalette::Background ) );
-                else helper().renderDot( painter, QPoint( center-2, j ), palette.color( QPalette::Background ) );
+                if( counter%2 == 0 ) helper().renderDot( painter, QPoint( center+1, j ), palette.color( QPalette::Window ) );
+                else helper().renderDot( painter, QPoint( center-2, j ), palette.color( QPalette::Window ) );
             }
 
         } else {
@@ -4108,8 +4108,8 @@ namespace Oxygen
             const int center( r.top()+r.height()/2 );
             for( int j = r.left()+2; j <= r.right()-3; j+=3, ++counter )
             {
-                if( counter%2 == 0 ) helper().renderDot( painter, QPoint( j, center+1 ), palette.color( QPalette::Background ) );
-                else helper().renderDot( painter, QPoint( j, center-2 ), palette.color( QPalette::Background ) );
+                if( counter%2 == 0 ) helper().renderDot( painter, QPoint( j, center+1 ), palette.color( QPalette::Window ) );
+                else helper().renderDot( painter, QPoint( j, center-2 ), palette.color( QPalette::Window ) );
             }
         }
 
@@ -7480,7 +7480,7 @@ namespace Oxygen
 
                 }
 
-                background = palette.color( QPalette::Background );
+                background = palette.color( QPalette::Window );
 
                 if( enabled ) drawContrast = false;
 
@@ -8664,7 +8664,7 @@ namespace Oxygen
         }
 
         const qreal penThickness = 1.6;
-        const QColor background = palette.color( QPalette::Background );
+        const QColor background = palette.color( QPalette::Window );
 
         const QPolygonF a( genericArrow( ( subControl == SC_SpinBoxUp ) ? ArrowUp:ArrowDown, ArrowNormal ) );
         const QRect arrowRect( subControlRect( CC_SpinBox, option, subControl, widget ) );
@@ -8720,7 +8720,7 @@ namespace Oxygen
         }
 
         // get base color
-        const QColor color = palette.color( QPalette::Background );
+        const QColor color = palette.color( QPalette::Window );
 
         if( horizontal )
         {
