@@ -99,6 +99,8 @@
 
 #include <cmath>
 
+constexpr int value_PM_DefaultTopLevelMargin = 11;
+constexpr int value_PM_DefaultChildMargin = 4;
 #if QT_VERSION >= 0x60000
 using QStyleOptionTabV3=QStyleOptionTab;
 using QStyleOptionFrameV2=QStyleOptionFrame;
@@ -665,11 +667,11 @@ namespace Oxygen
                 if( ( option && ( option->state & QStyle::State_Window ) ) || ( widget && widget->isWindow() ) )
                 {
 
-                    return pixelMetric( PM_DefaultTopLevelMargin, option, widget );
+                    return value_PM_DefaultTopLevelMargin;
 
                 } else {
 
-                    return pixelMetric( PM_DefaultChildMargin, option, widget );
+                    return value_PM_DefaultChildMargin;
 
                 }
 
@@ -698,9 +700,11 @@ namespace Oxygen
                 else break;
             }
 
-            case PM_DefaultChildMargin: return 4;
-            case PM_DefaultTopLevelMargin: return 11;
+#if QT_VERSION < 0x50000
+            case PM_DefaultChildMargin: return value_PM_DefaultChildMargin;
+            case PM_DefaultTopLevelMargin: return value_PM_DefaultTopLevelMargin;
             case PM_DefaultLayoutSpacing: return 4;
+#endif
             case PM_LayoutHorizontalSpacing: return -1;
             case PM_LayoutVerticalSpacing: return -1;
 
@@ -1042,7 +1046,7 @@ namespace Oxygen
         {
 
             // register primitives for which nothing is done
-            case PE_FrameStatusBar: fcn = &Style::emptyPrimitive; break;
+            case PE_FrameStatusBarItem: fcn = &Style::emptyPrimitive; break;
 
             case PE_Frame: fcn = &Style::drawFramePrimitive; break;
 

@@ -200,11 +200,13 @@ namespace Oxygen
         //! needed to update style when configuration is changed
         void globalPaletteChanged( void );
 
+#if QT_VERSION < 0x50000
         //! copied from kstyle
         int layoutSpacingImplementation(
             QSizePolicy::ControlType, QSizePolicy::ControlType, Qt::Orientation,
             const QStyleOption* option, const QWidget* widget ) const
         { return pixelMetric(PM_DefaultLayoutSpacing, option, widget); }
+#endif
 
         //! standard icons
         virtual QIcon
