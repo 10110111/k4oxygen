@@ -20,8 +20,6 @@ if("${QT_VERSION}" STREQUAL 5 OR "${QT_VERSION}" STREQUAL Qt5)
             message(WARNING "QtX11Extras package wasn't found. Shadows and smooth corners of menus and tooltips, as well as dragging by empty areas, won't be supported.")
         endif()
     endif()
-    # Re-enable deprecated QWeakPointer<QObject*>
-    add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
     if(NOT DEFINED PLUGIN_INSTALL_DIR)
         find_package(Qt5Core)
         get_target_property(QMakeExecutable ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)

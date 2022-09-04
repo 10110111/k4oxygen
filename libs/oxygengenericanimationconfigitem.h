@@ -30,7 +30,7 @@
 #include "oxygen_export.h"
 #include "oxygenanimationconfigitem.h"
 
-#include <QtCore/QWeakPointer>
+#include <QtCore/QPointer>
 #include <QFrame>
 #include <QSpinBox>
 
@@ -100,7 +100,7 @@ namespace Oxygen
         private:
 
         //! configuration widget
-        QWeakPointer<GenericAnimationConfigBox> _configurationWidget;
+        QPointer<GenericAnimationConfigBox> _configurationWidget;
 
     };
 

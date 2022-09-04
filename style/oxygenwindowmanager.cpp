@@ -594,7 +594,7 @@ namespace Oxygen
 
         }
 
-        _target.clear();
+        _target = {};
         if( _dragTimer.isActive() ) _dragTimer.stop();
         _dragPoint = QPoint();
         _globalDragPoint = QPoint();

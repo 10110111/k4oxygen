@@ -36,7 +36,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QSet>
 #include <QtCore/QString>
-#include <QtCore/QWeakPointer>
+#include <QtCore/QPointer>
 
 #include <QWidget>
 
@@ -246,8 +246,8 @@ namespace Oxygen
         QBasicTimer _dragTimer;
 
         //! target being dragged
-        /*! QWeakPointer is used in case the target gets deleted while drag is in progress */
-        QWeakPointer<QWidget> _target;
+        /*! QPointer is used in case the target gets deleted while drag is in progress */
+        QPointer<QWidget> _target;
 
         //! true if drag is about to start
         bool _dragAboutToStart;

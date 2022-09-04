@@ -29,7 +29,7 @@
 
 #include <QtCore/QEvent>
 #include <QtCore/QMap>
-#include <QtCore/QWeakPointer>
+#include <QtCore/QPointer>
 #include <QtGui/QHoverEvent>
 #include <QMainWindow>
 #include <QtGui/QMouseEvent>
@@ -77,7 +77,7 @@ namespace Oxygen
         AddEventFilter _addEventFilter;
 
         //! pointer to SplitterProxy
-        typedef QWeakPointer<SplitterProxy> SplitterProxyPointer;
+        typedef QPointer<SplitterProxy> SplitterProxyPointer;
 
         //! registered widgets
         typedef QMap<QWidget*, SplitterProxyPointer > WidgetMap;
@@ -126,7 +126,7 @@ namespace Oxygen
         bool _enabled;
 
         //! splitter object
-        QWeakPointer<QWidget> _splitter;
+        QPointer<QWidget> _splitter;
 
         //! hook
         QPoint _hook;

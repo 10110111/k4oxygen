@@ -29,7 +29,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QMap>
-#include <QtCore/QWeakPointer>
+#include <QtCore/QPointer>
 
 #include <QtGui/QPaintDevice>
 
@@ -38,13 +38,13 @@ namespace Oxygen
 
     //! data map
     /*! it maps templatized data object to associated object */
-    template< typename K, typename T > class BaseDataMap: public QMap< const K*, QWeakPointer<T> >
+    template< typename K, typename T > class BaseDataMap: public QMap< const K*, QPointer<T> >
     {
 
         public:
 
         typedef const K* Key;
-        typedef QWeakPointer<T> Value;
+        typedef QPointer<T> Value;
 
         //! constructor
         BaseDataMap( void ):
@@ -90,7 +90,7 @@ namespace Oxygen
             if( key == _lastKey )
             {
 
-                if( _lastValue ) _lastValue.clear();
+                if( _lastValue ) _lastValue = {};
                 _lastKey = NULL;
 
             }

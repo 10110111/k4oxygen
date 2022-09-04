@@ -29,7 +29,7 @@
 
 #include <QtCore/QEvent>
 #include <QtCore/QObject>
-#include <QtCore/QWeakPointer>
+#include <QtCore/QPointer>
 #include <QWidget>
 
 #include <cmath>
@@ -74,7 +74,7 @@ namespace Oxygen
         { _enabled = value; }
 
         //! target
-        const QWeakPointer<QWidget>& target( void ) const
+        const QPointer<QWidget>& target( void ) const
         { return _target; }
 
         //! invalid opacity
@@ -99,7 +99,7 @@ namespace Oxygen
         private:
 
         //! guarded target
-        QWeakPointer<QWidget> _target;
+        QPointer<QWidget> _target;
 
         //! enability
         bool _enabled;

@@ -58,6 +58,7 @@
 #include <QMdiSubWindow>
 #include <QStyleOption>
 #include <QStyleOptionSlider>
+#include <QPointer>
 #include <QToolBar>
 #include <QToolBox>
 #include <QWidget>
@@ -332,10 +333,18 @@ namespace Oxygen
             private:
 
             //! pointer to parent style object
+#if QT_VERSION < 0x50000
             QWeakPointer<const Style> _style;
+#else
+            QPointer<const Style> _style;
+#endif
 
             //! pointer to target tabBar
+#if QT_VERSION < 0x50000
             QWeakPointer<const QWidget> _tabBar;
+#else
+            QPointer<const QWidget> _tabBar;
+#endif
 
             //! if true, will paint on next TabBarTabShapeControlCall
             bool _dirty;

@@ -118,7 +118,7 @@ namespace Oxygen
         QBasicTimer _timer;
 
         //! target
-        QWeakPointer<QLineEdit> _target;
+        QPointer<QLineEdit> _target;
 
         //! true if target has clean button
         bool _hasClearButton;

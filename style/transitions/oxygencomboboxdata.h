@@ -86,7 +86,7 @@ namespace Oxygen
         QBasicTimer _timer;
 
         //! target
-        QWeakPointer<QComboBox> _target;
+        QPointer<QComboBox> _target;
 
     };
 

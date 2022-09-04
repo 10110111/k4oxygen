@@ -338,7 +338,7 @@ namespace Oxygen
                 qobject_cast<QSplitterHandle*>(_splitter.data()) ? QEvent::HoverLeave : QEvent::HoverMove,
                 _splitter.data()->mapFromGlobal(QCursor::pos()), _hook);
             QCoreApplication::sendEvent( _splitter.data(), &hoverEvent );
-            _splitter.clear();
+            _splitter = {};
 
         }
 

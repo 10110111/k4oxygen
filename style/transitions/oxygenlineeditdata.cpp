@@ -256,7 +256,7 @@ namespace Oxygen
     void LineEditData::targetDestroyed( void )
     {
         setEnabled( false );
-        _target.clear();
+        _target = {};
     }
 
 }

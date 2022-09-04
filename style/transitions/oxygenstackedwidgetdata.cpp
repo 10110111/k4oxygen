@@ -133,7 +133,7 @@ namespace Oxygen
     void StackedWidgetData::targetDestroyed( void )
     {
         setEnabled( false );
-        _target.clear();
+        _target = {};
     }
 
 }

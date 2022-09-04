@@ -216,7 +216,7 @@ namespace Oxygen
     void LabelData::targetDestroyed( void )
     {
         setEnabled( false );
-        _target.clear();
+        _target = {};
     }
 
 }

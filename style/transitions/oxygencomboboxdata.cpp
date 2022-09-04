@@ -146,7 +146,7 @@ namespace Oxygen
     void ComboBoxData::targetDestroyed( void )
     {
         setEnabled( false );
-        _target.clear();
+        _target = {};
     }
 
 }
