@@ -1,11 +1,11 @@
 # Introduction
-K4Oxygen is a variant of KDE4 Oxygen widget theme, released from KDE dependencies and supported both for Qt4 and Qt5.
+K4Oxygen is a variant of KDE4 Oxygen widget theme, released from KDE dependencies and supported both for Qt4, Qt5, and Qt6.
 
 It is based on oxygen-transparent for KDE4 (as of commit [aa154d4](https://github.com/KDE/oxygen-transparent/commit/aa154d4e2f930258a9f094014103078a91003180)), but currently has some **limitations**:
 
 * no window decorations implementation (it'd depend on KDE anyway, and the code would likely be different for KDE4 and KF5)
 * no configuration utility
-* translucency in Qt5 version is in experimental stage
+* translucency in Qt5 version is in experimental stage, and unchecked completely in Qt6 version
 
 The theme does read Oxygen and global KDE settings similarly to how oxygen-gtk does it.
 
@@ -18,12 +18,13 @@ You can install it using the following commands
     make
     sudo make install
 
-Similarly, for Qt4 version replace `-DQT_VERSION=5` with `-DQT_VERSION=4`.
+Similarly, for Qt4 or Qt6 version replace `-DQT_VERSION=5` with `-DQT_VERSION=4` or `-DQT_VERSION=6`, respectively.
 
 # Configuration
 ## Making K4Oxygen current Qt theme
 * Qt4: You can choose current theme using `qtconfig` (or, on some distros, `qtconfig-qt4`)
 * Qt5: Qt5 doesn't provide a standard utility to set its theme, but you can either try `qt5ct` utility, or set a global environment variable `QT_STYLE_OVERRIDE` to `k4oxygen`.
+* Qt6: Qt6 doesn't provide a standard utility to set its theme, but you can either try `qt6ct` utility, or set a global environment variable `QT_STYLE_OVERRIDE` to `k4oxygen`.
 
 ## Style settings
 In a KDE session K4Oxygen should pick the Oxygen and global KDE settings automatically with no user intervention.
