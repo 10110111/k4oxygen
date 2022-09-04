@@ -99,6 +99,26 @@
 
 #include <cmath>
 
+#if QT_VERSION >= 0x60000
+using QStyleOptionTabV3=QStyleOptionTab;
+using QStyleOptionFrameV2=QStyleOptionFrame;
+using QStyleOptionFrameV3=QStyleOptionFrame;
+using QStyleOptionToolBoxV2=QStyleOptionToolBox;
+using QStyleOptionViewItemV2=QStyleOptionViewItem;
+using QStyleOptionViewItemV4=QStyleOptionViewItem;
+using QStyleOptionDockWidgetV2=QStyleOptionDockWidget;
+using QStyleOptionProgressBarV2=QStyleOptionProgressBar;
+static inline Qt::Orientation orientation(const QStyleOptionProgressBar* opt)
+{
+    return opt->state & QStyle::State_Horizontal ? Qt::Horizontal : Qt::Vertical;
+}
+#else
+static inline Qt::Orientation orientation(const QStyleOptionProgressBarV2* opt)
+{
+    return opt->orientation;
+}
+#endif
+
 //_____________________________________________
 // style plugin
 namespace Oxygen
@@ -1541,7 +1561,7 @@ namespace Oxygen
     {
         const QRect out( insideMargin( option->rect, ProgressBar_GrooveMargin ) );
         const QStyleOptionProgressBarV2 *pbOpt( qstyleoption_cast<const QStyleOptionProgressBarV2 *>( option ) );
-        if( pbOpt && pbOpt->orientation == Qt::Vertical ) return out.adjusted( 0, 1, 0, -1 );
+        if( pbOpt && orientation(pbOpt) == Qt::Vertical ) return out.adjusted( 0, 1, 0, -1 );
         else return out.adjusted( 1, 0, -1, 0 );
     }
 
@@ -4798,7 +4818,7 @@ namespace Oxygen
         if( !( progress || busyIndicator ) ) return true;
 
         const int steps = qMax( pbOpt->maximum  - pbOpt->minimum, 1 );
-        const bool horizontal = !pbOpt2 || pbOpt2->orientation == Qt::Horizontal;
+        const bool horizontal = !pbOpt2 || orientation(pbOpt2) == Qt::Horizontal;
 
         //Calculate width fraction
         qreal widthFrac( busyIndicator ?  ProgressBar_BusyIndicatorSize/100.0 : progress/steps );
@@ -4854,7 +4874,7 @@ namespace Oxygen
     {
 
         const QStyleOptionProgressBarV2 *pbOpt = qstyleoption_cast<const QStyleOptionProgressBarV2 *>( option );
-        const Qt::Orientation orientation( pbOpt? pbOpt->orientation : Qt::Horizontal );
+        const Qt::Orientation orientation( pbOpt? ::orientation(pbOpt) : Qt::Horizontal );
 
         // ajust rect for alignment
         QRect rect( option->rect );
@@ -4878,7 +4898,7 @@ namespace Oxygen
         const bool enabled( flags&State_Enabled );
 
         const QStyleOptionProgressBarV2* pbOpt2 = qstyleoption_cast<const QStyleOptionProgressBarV2*>( option );
-        const bool horizontal = !pbOpt2 || pbOpt2->orientation == Qt::Horizontal;
+        const bool horizontal = !pbOpt2 || orientation(pbOpt2) == Qt::Horizontal;
         const bool reverseLayout = ( option->direction == Qt::RightToLeft );
 
         // rotate label for vertical layout

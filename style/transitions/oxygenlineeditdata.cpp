@@ -34,7 +34,13 @@
 #include <QtGui/QPainter>
 #include <QSpinBox>
 #include <QStyle>
-#include <QStyleOptionFrameV2>
+
+#if QT_VERSION >= 0x60000
+# include <QStyleOptionFrame>
+using QStyleOptionFrameV2=QStyleOptionFrame;
+#else
+# include <QStyleOptionFrameV2>
+#endif
 
 namespace Oxygen
 {

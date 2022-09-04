@@ -65,6 +65,11 @@
 #include "oxygennetrootinfo.h"
 #endif
 
+#if QT_VERSION >= 0x60000
+using QStyleOptionFrameV2=QStyleOptionFrame;
+#endif
+
+
 namespace Oxygen
 {
 
