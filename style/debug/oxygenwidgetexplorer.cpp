@@ -79,7 +79,7 @@ namespace Oxygen
             if( !type.isEmpty() )
             {
                 QTextStream( stdout ) << "Oxygen::WidgetExplorer::eventFilter - widget: " << object << " (" << object->metaObject()->className() << ")";
-                QTextStream( stdout ) << " type: " << type  << endl;
+                QTextStream( stdout ) << " type: " << type  << '\n';
             }
         }
 
@@ -115,16 +115,16 @@ namespace Oxygen
                     << "Oxygen::WidgetExplorer::eventFilter -"
                     << " event: " << event << " type: " << eventType( event->type() )
                     << " widget: " << widgetInformation( widget )
-                    << endl;
+                    << '\n';
 
                 // print parent information
                 QWidget* parent( widget->parentWidget() );
                 while( parent )
                 {
-                    QTextStream( stdout ) << "    parent: " << widgetInformation( parent ) << endl;
+                    QTextStream( stdout ) << "    parent: " << widgetInformation( parent ) << '\n';
                     parent = parent->parentWidget();
                 }
-                QTextStream( stdout ) << "" << endl;
+                QTextStream( stdout ) << "\n";
 
             }
             break;
