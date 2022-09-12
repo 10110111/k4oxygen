@@ -68,12 +68,8 @@ namespace Oxygen
         This is needed because parents sometime disable the textChanged signal of the embedded
         QLineEdit
         */
-        if( qobject_cast<QSpinBox*>( _target.data()->parentWidget() ) )
+        if(qobject_cast<QSpinBox*>( _target.data()->parentWidget() ) || qobject_cast<QDoubleSpinBox*>( _target.data()->parentWidget() ))
         {
-
-            connect( _target.data()->parentWidget(), SIGNAL(valueChanged(QString)), SLOT(textChanged()) );
-
-        } else if( qobject_cast<QDoubleSpinBox*>( _target.data()->parentWidget() ) ) {
 
 #if QT_VERSION >= 0x60000
             connect( _target.data()->parentWidget(), SIGNAL(textChanged(QString)), SLOT(textChanged()) );
