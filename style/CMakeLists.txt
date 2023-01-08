@@ -1,6 +1,7 @@
 include_directories (animations debug transitions . ../libs/ ../libs/imported/ ${CMAKE_BINARY_DIR}/style/)
 
 set(oxygenstyle_LIB_SRCS
+    ../libs/oxygenbluenoise.cpp
     ../libs/oxygenanimation.cpp
     ../libs/oxygenhelper.cpp
     ../libs/oxygenitemmodel.cpp

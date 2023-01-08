@@ -21,11 +21,13 @@
  */
 
 #include "oxygenhelper.h"
+#include "oxygenbluenoise.h"
 
 #include <QWidget>
 #include <QtGui/QPainter>
 
 #include <math.h>
+#include <cstring>
 
 #if HAVE_X11
 #include <QX11Info>
@@ -465,6 +467,31 @@ namespace Oxygen
 
     }
 
+    float dither(float c, const int x, const int y)
+    {
+        static const auto step = [](float edge, float x){ return x<edge ? 0.f : 1.f; };
+        constexpr auto period = BLUE_NOISE_TILE_WIDTH;
+        const float noise = blueNoiseTriangleRemapped[x%period][y%period];
+        constexpr float rgbMaxValue = 255;
+
+        {
+            // Prevent undershoot (imperfect white) due to clipping of positive noise contributions
+            float antiUndershootC = 1+(0.5-sqrt(2*rgbMaxValue*(1-c)))/rgbMaxValue;
+            float edge = 1-1/(2*rgbMaxValue);
+            // Per-component version of: c = c > edge ? antiUndershootC : c;
+            c = antiUndershootC + step(-edge, -c) * (c-antiUndershootC);
+        }
+
+        {
+            // Prevent overshoot (imperfect black) due to clipping of negative noise contributions
+            float antiOvershootC  = (-1+sqrt(8*rgbMaxValue*c))/(2*rgbMaxValue);
+            float edge = 1/(2*rgbMaxValue);
+            // Per-component version of: c = c < edge ? antiOvershootC : c;
+            c = antiOvershootC + step(edge, c) * (c-antiOvershootC);
+        }
+
+        return c+noise/rgbMaxValue;
+    }
 
     //____________________________________________________________________
     QPixmap Helper::verticalGradient( const QColor& color, int height, int offset )
@@ -474,18 +501,69 @@ namespace Oxygen
 
         if ( !pixmap )
         {
-            pixmap = new QPixmap( 1, height );
-            pixmap->fill( Qt::transparent );
+            std::vector<std::array<float,4>> gradientColors(height);
 
-            QLinearGradient gradient( 0, offset, 0, height );
-            gradient.setColorAt( 0.0, backgroundTopColor( color ) );
-            gradient.setColorAt( 0.5, color );
-            gradient.setColorAt( 1.0, backgroundBottomColor( color ) );
+            const auto top = backgroundTopColor( color );
+            const auto mid = color;
+            const auto bottom = backgroundBottomColor( color );
+            const float tR = top.red()/255.f;
+            const float tG = top.green()/255.f;
+            const float tB = top.blue()/255.f;
+            const float tA = top.alpha()/255.f;
+            const float mR = mid.red()/255.f;
+            const float mG = mid.green()/255.f;
+            const float mB = mid.blue()/255.f;
+            const float mA = mid.alpha()/255.f;
+            const float bR = bottom.red()/255.f;
+            const float bG = bottom.green()/255.f;
+            const float bB = bottom.blue()/255.f;
+            const float bA = bottom.alpha()/255.f;
+            for(unsigned n = 0; n < height; ++n)
+            {
+                if(n < offset)
+                {
+                    gradientColors[n] = {tR, tG, tB, tA};
+                    continue;
+                }
+                const auto t = float(n-offset)/(height-offset);
+                if(t<0.5)
+                {
+                    const float g = t*2;
+                    const float red   = tR+(mR-tR)*g;
+                    const float green = tG+(mG-tG)*g;
+                    const float blue  = tB+(mB-tB)*g;
+                    const float alpha = tA+(mA-tA)*g;
+                    gradientColors[n] = {red,green,blue,alpha};
+                }
+                else
+                {
+                    const float g = (t-0.5)*2;
+                    const float red   = mR+(bR-mR)*g;
+                    const float green = mG+(bG-mG)*g;
+                    const float blue  = mB+(bB-mB)*g;
+                    const float alpha = mA+(bA-mA)*g;
+                    gradientColors[n] = {red,green,blue,alpha};
+                }
+            }
+            QImage image(BLUE_NOISE_TILE_WIDTH, height, QImage::Format_ARGB32);
+            const auto bits = image.bits();
+            const auto stride = image.bytesPerLine();
+            for(int j=0; j<height; ++j)
+            {
+                for(int i=0; i<BLUE_NOISE_TILE_WIDTH; ++i)
+                {
+                    using std::min;
+                    const auto red   = 255*min(dither(gradientColors[j][0], i,j), 1.f);
+                    const auto green = 255*min(dither(gradientColors[j][1], i,j), 1.f);
+                    const auto blue  = 255*min(dither(gradientColors[j][2], i,j), 1.f);
+                    const auto alpha = 255*min(dither(gradientColors[j][3], i,j), 1.f);
+                    const auto rgba = QColor(red,green,blue,alpha).rgba();
+                    std::memcpy(bits+j*stride+i*4, &rgba, sizeof rgba);
+                }
+            }
 
-            QPainter p( pixmap );
-            p.fillRect( pixmap->rect(), gradient );
-
-            p.end();
+            pixmap = new QPixmap( BLUE_NOISE_TILE_WIDTH, height );
+            pixmap->convertFromImage(image);
 
             _backgroundCache.insert( key, pixmap );
         }
