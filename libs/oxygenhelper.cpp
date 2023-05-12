@@ -29,8 +29,8 @@
 #include <math.h>
 #include <cstring>
 
+#include "oxygenx11.h"
 #if HAVE_X11
-#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include "fixx11h.h"

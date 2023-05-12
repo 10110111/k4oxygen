@@ -60,8 +60,8 @@
 
 #include "oxygenconfig.h"
 
+#include "oxygenx11.h"
 #if HAVE_X11
-#include <QX11Info>
 #include "oxygennetrootinfo.h"
 #endif
 
@@ -620,7 +620,7 @@ namespace Oxygen
         {
 
             #if HAVE_X11
-            XUngrabPointer(QX11Info::display(), QX11Info::appTime());
+            XUngrabPointer(QX11Info::display(), CurrentTime);
             NETRootInfo rootInfo(QX11Info::display(), NET::WMMoveResize);
             rootInfo.moveResizeRequest( widget->window()->winId(), position.x(), position.y(), NET::Move);
             #endif

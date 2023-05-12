@@ -24,11 +24,7 @@
 
 #include "oxygenhelper.h"
 #include "oxygenanimationmodes.h"
-
-#if HAVE_X11
-#include <QX11Info>
-#include <X11/Xdefs.h>
-#endif
+#include "oxygenx11.h"
 
 //! helper class
 /*! contains utility functions used at multiple places in oxygen style */

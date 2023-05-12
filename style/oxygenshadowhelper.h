@@ -35,8 +35,8 @@
 
 #include <stdint.h>
 
+#include "oxygenx11.h"
 #if HAVE_X11
-#include <X11/Xdefs.h>
 #include <xcb/xcb.h>
 #endif
 

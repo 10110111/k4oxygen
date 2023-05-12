@@ -31,16 +31,13 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "oxygenstylehelper.h"
+#include "oxygenx11.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QSet>
 #include <QtCore/QStringList>
 #include <QApplication>
 #include <QWidget>
-
-#if HAVE_X11
-#include <X11/Xdefs.h>
-#endif
 
 namespace Oxygen
 {
