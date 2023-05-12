@@ -36,7 +36,6 @@
 #include <QtCore/QEvent>
 
 #if HAVE_X11
-#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib-xcb.h>
@@ -349,9 +348,14 @@ namespace Oxygen
 
         // Create image from QPixmap and push it to pixmap
         QImage image=source.toImage();
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+        const int sizeInBytes = image.sizeInBytes();
+#else
+        const int sizeInBytes = image.byteCount();
+#endif
         xcb_put_image(xcbc,XCB_IMAGE_FORMAT_Z_PIXMAP,pixmap,gc_,
                         image.width(),image.height(),0,0,
-                        0,32,image.byteCount(),image.constBits());
+                        0,32,sizeInBytes,image.constBits());
 
         return pixmap;
         #else
@@ -410,7 +414,13 @@ namespace Oxygen
                 // balloon tip needs special margins to deal with the arrow
                 int top = 0;
                 int bottom = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+                const auto margins = widget->contentsMargins();
+                top = margins.top();
+                bottom = margins.bottom();
+#else
                 widget->getContentsMargins(NULL, &top, NULL, &bottom );
+#endif
 
                 // also need to decrement default size further due to extra hard coded round corner
                 const int size = _size - 2;

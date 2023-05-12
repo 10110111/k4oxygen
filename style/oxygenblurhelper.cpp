@@ -38,7 +38,6 @@
 #include <QPushButton>
 
 #if HAVE_X11
-#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
@@ -238,7 +237,11 @@ namespace Oxygen
         } else {
 
             QVector<unsigned long> data;
+#if QT_VERSION >= QT_VERSION_CHECK(5,8,0)
+            for(const auto& rect : blurRegion)
+#else
             foreach( const QRect& rect, blurRegion.rects() )
+#endif
             { data << rect.x() << rect.y() << rect.width() << rect.height(); }
 
             XChangeProperty(
@@ -248,7 +251,11 @@ namespace Oxygen
             if( ! widget->inherits( "Konsole::MainWindow" ) )
             {
                 data.clear();
+#if QT_VERSION >= QT_VERSION_CHECK(5,8,0)
+                for(const auto& rect : opaqueRegion)
+#else
                 foreach( const QRect& rect, opaqueRegion.rects() )
+#endif
                 { data << rect.x() << rect.y() << rect.width() << rect.height(); }
 
                 XChangeProperty(

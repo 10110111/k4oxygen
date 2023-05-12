@@ -44,9 +44,7 @@
 #include <QtGui/QRegion>
 #include <QToolBar>
 
-#if HAVE_X11
-#include <X11/Xdefs.h>
-#endif
+#include "oxygenx11.h"
 
 namespace Oxygen
 {
