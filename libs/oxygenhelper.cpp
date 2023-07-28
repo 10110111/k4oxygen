@@ -26,7 +26,9 @@
 #include <QWidget>
 #include <QtGui/QPainter>
 
+#include <array>
 #include <math.h>
+#include <vector>
 #include <cstring>
 
 #if HAVE_X11
