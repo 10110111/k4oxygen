@@ -527,7 +527,7 @@ namespace Oxygen
                     gradientColors[n] = {tR, tG, tB, tA};
                     continue;
                 }
-                const auto t = float(n-offset)/(height-offset);
+                const auto t = float(n-offset)/(height-1-offset);
                 if(t<0.5)
                 {
                     const float g = t*2;
