@@ -508,18 +508,21 @@ namespace Oxygen
             const auto top = backgroundTopColor( color );
             const auto mid = color;
             const auto bottom = backgroundBottomColor( color );
-            const float tR = top.red()/255.f;
-            const float tG = top.green()/255.f;
-            const float tB = top.blue()/255.f;
-            const float tA = top.alpha()/255.f;
-            const float mR = mid.red()/255.f;
-            const float mG = mid.green()/255.f;
-            const float mB = mid.blue()/255.f;
-            const float mA = mid.alpha()/255.f;
-            const float bR = bottom.red()/255.f;
-            const float bG = bottom.green()/255.f;
-            const float bB = bottom.blue()/255.f;
-            const float bA = bottom.alpha()/255.f;
+            // To match the color of the bottom side of the gradient with that
+            // of the flat continuation down, we need to round as Qt does it
+            // for the bottom part.
+            const float tR = std::round(255*top.redF())/255;
+            const float tG = std::round(255*top.greenF())/255;
+            const float tB = std::round(255*top.blueF())/255;
+            const float tA = std::round(255*top.alphaF())/255;
+            const float mR = std::round(255*mid.redF())/255;
+            const float mG = std::round(255*mid.greenF())/255;
+            const float mB = std::round(255*mid.blueF())/255;
+            const float mA = std::round(255*mid.alphaF())/255;
+            const float bR = std::round(255*bottom.redF())/255;
+            const float bG = std::round(255*bottom.greenF())/255;
+            const float bB = std::round(255*bottom.blueF())/255;
+            const float bA = std::round(255*bottom.alphaF())/255;
             for(unsigned n = 0; n < height; ++n)
             {
                 if(n < offset)
