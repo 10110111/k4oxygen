@@ -71,7 +71,9 @@ namespace Oxygen
         #endif
     {
         #if HAVE_X11
+
         // Make a valid graphic context using a dummy pixmap
+        if(_helper.x11Present())
         {
             xcb_connection_t*const xcbc=getXCBConnection();
             gc_=xcb_generate_id(xcbc);
@@ -80,6 +82,7 @@ namespace Oxygen
             xcb_create_gc(xcbc,gc_,dummyPixmap,0,0);
             xcb_free_pixmap(xcbc,dummyPixmap);
         }
+
         #endif
     }
 
@@ -88,8 +91,11 @@ namespace Oxygen
     {
 
         #if HAVE_X11
-        foreach( const PixmapHandle& value, _pixmaps  ) freePixmap(value);
-        foreach( const PixmapHandle& value, _dockPixmaps  ) freePixmap(value);
+        if(_helper.x11Present())
+        {
+            foreach( const PixmapHandle& value, _pixmaps  ) freePixmap(value);
+            foreach( const PixmapHandle& value, _dockPixmaps  ) freePixmap(value);
+        }
         #endif
 
         delete _shadowCache;
@@ -100,9 +106,12 @@ namespace Oxygen
     void ShadowHelper::reset( void )
     {
         #if HAVE_X11
-        // round pixmaps
-        foreach( const PixmapHandle& value, _pixmaps  ) freePixmap(value);
-        foreach( const PixmapHandle& value, _dockPixmaps  ) freePixmap(value);
+        if(_helper.x11Present())
+        {
+            // round pixmaps
+            foreach( const PixmapHandle& value, _pixmaps  ) freePixmap(value);
+            foreach( const PixmapHandle& value, _dockPixmaps  ) freePixmap(value);
+        }
         #endif
 
         _pixmaps.clear();
@@ -271,7 +280,8 @@ namespace Oxygen
 
         // create atom
         #if HAVE_X11
-        if( !_atom ) _atom = XInternAtom( QX11Info::display(), netWMShadowAtomName, False);
+        if(!_atom && _helper.x11Present())
+            _atom = XInternAtom( QX11Info::display(), netWMShadowAtomName, False);
         #endif
 
         // make sure size is valid
@@ -327,6 +337,8 @@ namespace Oxygen
         */
 
         #if HAVE_X11
+        if(!_helper.x11Present()) return 0;
+
         const int width( source.width() );
         const int height( source.height() );
 
@@ -356,6 +368,7 @@ namespace Oxygen
         if( !widget ) return false;
 
         #if HAVE_X11
+        if(!_helper.x11Present()) return false;
         #ifndef QT_NO_XRENDER
 
         // TODO: also check for NET_WM_SUPPORTED atom, before installing shadow
@@ -439,7 +452,8 @@ namespace Oxygen
 
         #if HAVE_X11
         if( !( widget && widget->testAttribute(Qt::WA_WState_Created) ) ) return;
-        XDeleteProperty(QX11Info::display(), widget->winId(), _atom);
+        if(_helper.x11Present())
+            XDeleteProperty(QX11Info::display(), widget->winId(), _atom);
         #endif
 
     }
@@ -449,7 +463,8 @@ namespace Oxygen
     {
 
         #if HAVE_X11
-        XDeleteProperty(QX11Info::display(), id, _atom);
+        if(_helper.x11Present())
+            XDeleteProperty(QX11Info::display(), id, _atom);
         #endif
 
     }

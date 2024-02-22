@@ -161,6 +161,8 @@ namespace Oxygen
         virtual ~Helper()
         {}
 
+        bool x11Present() const { return x11Present_; }
+
         //! reload configuration
         virtual void reloadConfig();
 
@@ -447,6 +449,8 @@ namespace Oxygen
 
         //! background gradient hint atom
         Atom _backgroundPixmapAtom;
+
+        bool x11Present_;
 
         #endif
     };

@@ -43,13 +43,16 @@ namespace Oxygen
         _useBackgroundGradient( true )
     {
 #if HAVE_X11
-        // get display
-        Display *display = QX11Info::display();
+        if(x11Present())
+        {
+            // get display
+            Display *display = QX11Info::display();
 
-        // create compositing screen
-        QByteArray buffer;
-        QTextStream( &buffer ) << "_NET_WM_CM_S" << DefaultScreen( display );
-        _compositingManagerAtom = XInternAtom( display, buffer.constData(), False);
+            // create compositing screen
+            QByteArray buffer;
+            QTextStream( &buffer ) << "_NET_WM_CM_S" << DefaultScreen( display );
+            _compositingManagerAtom = XInternAtom( display, buffer.constData(), False);
+        }
 #endif
     }
 
@@ -678,6 +681,7 @@ namespace Oxygen
     bool StyleHelper::compositingActive( void ) const
     {
 #if HAVE_X11
+        if (!x11Present()) return false;
         // direct call to X
         return XGetSelectionOwner( QX11Info::display(), _compositingManagerAtom ) != None;
 #else

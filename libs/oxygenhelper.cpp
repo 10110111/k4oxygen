@@ -25,6 +25,7 @@
 
 #include <QWidget>
 #include <QtGui/QPainter>
+#include <QGuiApplication>
 
 #include <array>
 #include <math.h>
@@ -48,6 +49,7 @@ namespace Oxygen
     //____________________________________________________________________
     Helper::Helper()
     {
+        x11Present_ = qApp->platformName() == "xcb";
         _config = KGlobal::config();
         _contrast = KGlobalSettings::contrastF( _config );
 
@@ -58,14 +60,15 @@ namespace Oxygen
         _backgroundCache.setMaxCost( 64 );
 
         #if HAVE_X11
+        if (x11Present_)
+        {
+            // create argb atom
+            _argbAtom = XInternAtom( QX11Info::display(), "_KDE_NET_WM_HAS_ARGB", False);
 
-        // create argb atom
-        _argbAtom = XInternAtom( QX11Info::display(), "_KDE_NET_WM_HAS_ARGB", False);
-
-        // create background gradient atom
-        _backgroundGradientAtom = XInternAtom( QX11Info::display(), "_KDE_OXYGEN_BACKGROUND_GRADIENT", False);
-        _backgroundPixmapAtom = XInternAtom( QX11Info::display(), "_KDE_OXYGEN_BACKGROUND_PIXMAP", False);
-
+            // create background gradient atom
+            _backgroundGradientAtom = XInternAtom( QX11Info::display(), "_KDE_OXYGEN_BACKGROUND_GRADIENT", False);
+            _backgroundPixmapAtom = XInternAtom( QX11Info::display(), "_KDE_OXYGEN_BACKGROUND_PIXMAP", False);
+        }
         #endif
 
     }
@@ -1167,7 +1170,7 @@ namespace Oxygen
     void Helper::setHasHint( WId id, Atom atom, bool value ) const
     {
 
-        if( !id ) return;
+        if( !id || !x11Present_ ) return;
 
         unsigned long uLongValue( value );
         XChangeProperty(
@@ -1180,7 +1183,7 @@ namespace Oxygen
     //____________________________________________________________________
     bool Helper::hasHint( WId id, Atom atom ) const
     {
-        if( !id ) return false;
+        if( !id || !x11Present_ ) return false;
 
         Atom type( None );
         int format(0);
