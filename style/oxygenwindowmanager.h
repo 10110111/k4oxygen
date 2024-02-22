@@ -51,7 +51,7 @@ namespace Oxygen
         public:
 
         //! constructor
-        explicit WindowManager( QObject* );
+        explicit WindowManager( QObject*, Helper& );
 
         //! destructor
         virtual ~WindowManager( void )
@@ -181,6 +181,8 @@ namespace Oxygen
         template<typename T> T findParent( const QWidget* ) const;
 
         private:
+
+        Helper& _helper;
 
         //! enability
         bool _enabled;

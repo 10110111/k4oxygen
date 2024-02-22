@@ -57,6 +57,8 @@ namespace Oxygen
 
         #if HAVE_X11
 
+        if(!_helper.x11Present()) return;
+
         // create atom
         _xEmbedAtom = XInternAtom( QX11Info::display(), "_XEMBED_INFO", False);
 
@@ -292,6 +294,7 @@ namespace Oxygen
     bool ArgbHelper::isXEmbed( QWidget* widget ) const
     {
         #if HAVE_X11
+        if(!_helper.x11Present()) return false;
 
         // QTextStream( stdout ) << "ArgbHelper::isXEmbed" << endl;
 

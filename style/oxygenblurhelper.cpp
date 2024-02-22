@@ -55,6 +55,8 @@ namespace Oxygen
 
         #if HAVE_X11
 
+        if(!_helper.x11Present()) return;
+
         // create atom
         _blurAtom = XInternAtom( QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
         _opaqueAtom = XInternAtom( QX11Info::display(), "_NET_WM_OPAQUE_REGION", False);

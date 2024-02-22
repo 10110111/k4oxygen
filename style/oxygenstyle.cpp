@@ -201,7 +201,7 @@ namespace Oxygen
         _shadowHelper( new ShadowHelper( this, *_helper ) ),
         _animations( new Animations( this ) ),
         _transitions( new Transitions( this ) ),
-        _windowManager( new WindowManager( this ) ),
+        _windowManager( new WindowManager( this, *_helper ) ),
         _topLevelManager( new TopLevelManager( this, *_helper ) ),
         _frameShadowFactory( new FrameShadowFactory( this ) ),
         _mdiWindowShadowFactory( new MdiWindowShadowFactory( this, *_helper ) ),

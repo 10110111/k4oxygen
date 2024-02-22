@@ -161,6 +161,8 @@ namespace Oxygen
         virtual ~Helper()
         {}
 
+        bool x11Present() const { return x11Present_; }
+
         //! reload configuration
         virtual void reloadConfig();
 
@@ -447,6 +449,16 @@ namespace Oxygen
 
         //! background gradient hint atom
         Atom _backgroundPixmapAtom;
+
+        #if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+        bool x11Present_;
+        #else
+        static constexpr bool x11Present_ = true; // Qt4 has statically-defined platform
+        #endif
+
+        #else
+
+        static constexpr bool x11Present_ = false;
 
         #endif
     };

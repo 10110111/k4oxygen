@@ -29,6 +29,7 @@
 // IN THE SOFTWARE.
 //////////////////////////////////////////////////////////////////////////////
 
+#include "oxygenhelper.h"
 #include "oxygenwindowmanager.h"
 #include "oxygenpropertynames.h"
 #include "oxygenstyleconfigdata.h"
@@ -74,8 +75,9 @@ namespace Oxygen
 {
 
     //_____________________________________________________________
-    WindowManager::WindowManager( QObject* parent ):
+    WindowManager::WindowManager( QObject* parent, Helper& helper ):
         QObject( parent ),
+        _helper( helper ),
         _enabled( true ),
         _useWMMoveResize( true ),
         _dragMode( StyleConfigData::WD_FULL ),
@@ -616,7 +618,7 @@ namespace Oxygen
         if( QWidget::mouseGrabber() ) return;
 
         // ungrab pointer
-        if( useWMMoveResize() )
+        if(useWMMoveResize() && _helper.x11Present())
         {
 
             #if HAVE_X11
