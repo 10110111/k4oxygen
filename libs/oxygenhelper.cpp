@@ -25,7 +25,9 @@
 
 #include <QWidget>
 #include <QtGui/QPainter>
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
 #include <QGuiApplication>
+#endif
 
 #include <array>
 #include <math.h>
@@ -49,7 +51,10 @@ namespace Oxygen
     //____________________________________________________________________
     Helper::Helper()
     {
+        #if HAVE_X11 && QT_VERSION >= QT_VERSION_CHECK(5,0,0)
         x11Present_ = qApp->platformName() == "xcb";
+        #endif
+
         _config = KGlobal::config();
         _contrast = KGlobalSettings::contrastF( _config );
 
