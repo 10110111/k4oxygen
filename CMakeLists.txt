@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(k4oxygen CXX)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 if(NOT DEFINED QT_VERSION)
     message("** NOTE: QT_VERSION is not defined, using default setup: Qt4. Pass -DQT_VERSION=5 to cmake to\n    choose Qt5, -DQT_VERSION=6 to cmake to choose Qt6, or -DQT_VERSION=4 to get rid of this\n    message and choose Qt4.")
