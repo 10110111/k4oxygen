@@ -54,8 +54,7 @@ QStringList getConfigPaths()
         if(!data.empty())
             return QString::fromUtf8(data.c_str()).trimmed().split(':');
     }
-#endif
-
+#else
     QProcess process;
     QStringList args{"--path","config"};
     process.start("kde4-config",args);
@@ -64,6 +63,7 @@ QStringList getConfigPaths()
     process.start("kf5-config",args);
     if(process.waitForFinished() && process.exitCode()==0)
         return QString::fromUtf8(process.readAllStandardOutput()).trimmed().split(':');
+#endif
 
     // Resort to user config dir
     QString dirName=userConfigDir()+"/k4oxygen";
