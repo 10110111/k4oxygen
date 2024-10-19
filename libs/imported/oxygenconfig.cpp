@@ -68,6 +68,9 @@ QStringList getConfigPaths()
     // Resort to user config dir
     QString dirName=userConfigDir()+"/k4oxygen";
     if(QDir(dirName).exists()) return QStringList(dirName);
+    // If no k4oxygen-specific config file exists, try the default location for KF6
+    dirName = userConfigDir();
+    if(QDir(dirName).exists()) return QStringList(dirName);
     return QStringList();
 }
 
