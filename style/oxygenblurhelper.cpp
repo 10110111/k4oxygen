@@ -218,6 +218,8 @@ namespace Oxygen
 
         #if HAVE_X11
 
+        if(!_helper.x11Present()) return;
+
         /*
         directly from bespin code. Supposibly prevent playing with some 'pseudo-widgets'
         that have winId matching some other -random- window
@@ -277,6 +279,7 @@ namespace Oxygen
     void BlurHelper::clear( QWidget* widget ) const
     {
         #if HAVE_X11
+        if(!_helper.x11Present()) return;
         XDeleteProperty( QX11Info::display(), widget->winId(), _blurAtom );
         XDeleteProperty( QX11Info::display(), widget->winId(), _opaqueAtom );
         #endif
