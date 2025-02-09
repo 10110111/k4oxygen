@@ -90,11 +90,12 @@ namespace Oxygen
     {
 
         #if HAVE_X11
-        if(_helper.x11Present())
-        {
-            foreach( const PixmapHandle& value, _pixmaps  ) freePixmap(value);
-            foreach( const PixmapHandle& value, _dockPixmaps  ) freePixmap(value);
-        }
+        foreach(const PixmapHandle& value, _pixmaps)
+            if(value)
+                freePixmap(value);
+        foreach(const PixmapHandle& value, _dockPixmaps)
+            if(value)
+                freePixmap(value);
         #endif
 
         delete _shadowCache;
