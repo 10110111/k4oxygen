@@ -16,7 +16,7 @@ if("${QT_VERSION}" STREQUAL 6)
     if(NOT DEFINED PLUGIN_INSTALL_DIR)
         get_target_property(libQtCorePath Qt6::Core LOCATION)
         get_filename_component(libQtCoreDir "${libQtCorePath}" DIRECTORY)
-        set(QMakeExecutable "${libQtCoreDir}/../bin/qmake")
+        set(QMakeExecutable "${libQtCoreDir}/../bin/qmake6")
         execute_process(COMMAND "${QMakeExecutable}" -query QT_INSTALL_PLUGINS
                         OUTPUT_VARIABLE Qt6PluginInstallDir
                         ERROR_QUIET
