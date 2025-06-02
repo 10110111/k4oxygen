@@ -17,6 +17,12 @@ if("${QT_VERSION}" STREQUAL 6)
         get_target_property(libQtCorePath Qt6::Core LOCATION)
         get_filename_component(libQtCoreDir "${libQtCorePath}" DIRECTORY)
         set(QMakeExecutable "${libQtCoreDir}/../bin/qmake6")
+        if(NOT EXISTS "${QMakeExecutable}")
+            set(QMakeExecutable "${libQtCoreDir}/../../bin/qmake6")
+            if(NOT EXISTS "${QMakeExecutable}")
+                message(WARNING "Failed to find qmake6 executable, style installation directory will be wrong")
+            endif()
+        endif()
         execute_process(COMMAND "${QMakeExecutable}" -query QT_INSTALL_PLUGINS
                         OUTPUT_VARIABLE Qt6PluginInstallDir
                         ERROR_QUIET
