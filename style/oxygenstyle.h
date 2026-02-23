@@ -127,6 +127,8 @@ namespace Oxygen
         //! widget unpolishing
         virtual void unpolish( QWidget* );
 
+        QPalette standardPalette() const override;
+
         //! needed to avoid warnings at compilation time
         using  QCommonStyle::polish;
         using  QCommonStyle::unpolish;

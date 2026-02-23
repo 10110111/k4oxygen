@@ -131,7 +131,11 @@ void KGlobalSettings::activate(ActivateOptions options)
         }
 
         if (options & ApplySettings) {
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
             kdisplaySetPalette(); // XXX(10110111): originally: "d->kdisplaySetStyle(); // implies palette setup"
+#else
+//            d->kdisplaySetStyle(); // implies palette setup
+#endif
             kdisplaySetFont();
 //            d->propagateQtSettings();
 

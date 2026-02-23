@@ -620,6 +620,11 @@ namespace Oxygen
 
     }
 
+    QPalette Style::standardPalette() const
+    {
+        return KGlobalSettings::createApplicationPalette();
+    }
+
     //______________________________________________________________
     int Style::pixelMetric( PixelMetric metric, const QStyleOption* option, const QWidget* widget ) const
     {
