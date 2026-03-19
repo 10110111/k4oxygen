@@ -77,6 +77,10 @@ if(X11_FOUND)
     set(X11_LIBRARIES ${X11_LIBRARIES} ${XCB_PACKAGE_LIBRARIES})
 endif()
 
+if(WIN32)
+    add_definitions(-DMAKE_OXYGENSTYLE_LIB)
+endif()
+
 message("++ Will install Qt plugin to ${PLUGIN_INSTALL_DIR}")
 
 set(GENERIC_LIB_VERSION 0.0.1)
