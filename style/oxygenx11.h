@@ -3,7 +3,9 @@
 
 #include <QtGlobal>
 
-#if HAVE_X11 && QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#if HAVE_X11
+
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 
 # include <QGuiApplication>
 # include <X11/Xlib.h>
@@ -22,12 +24,14 @@ public:
 # ifndef Q_WS_X11
 #  define Q_WS_X11
 # endif
-#include "fixx11h.h"
+# include "fixx11h.h"
 
 #else
 
 # include <QX11Info>
 # include <X11/Xdefs.h>
+
+#endif
 
 #endif
 
